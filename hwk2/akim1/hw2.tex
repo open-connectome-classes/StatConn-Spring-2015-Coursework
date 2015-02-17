@@ -1,0 +1,52 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+
+\title{Statistical Decision Framework}
+\author{akim1}
+\date{February 17, 2015}
+
+\begin{document}
+\maketitle
+
+As described in lecture, there are five components to the statistical decision
+theoretical problem. One example of such is described below for the problem of
+clustering nodes in a graph.
+
+\begin{description}
+\item[Sample space]
+The sample space describes all possible arrangements of edges, nodes, and
+labels.
+\begin{equation*}
+\mathscr{G}=(V,E,Y)
+\end{equation*}
+
+\item[Model]
+The model is given by the two stochastic blocks and can be described as follows:
+\begin{equation*}
+P=\mathit{SBM}_n^2(\rho,\beta)\textrm{ where }\rho\in\Delta_2\textrm{, }\beta\in(0,1)^{2\times2}
+\end{equation*}
+
+\item[Action space]
+The action space is the assignment given by the clustering algorithm.
+\begin{equation*}
+A=\{y\in\{0,1\}^n\}
+\end{equation*}
+
+\item[Decision rule class]
+The decision rule class is given by k-means square clustering.
+
+\item[Loss function]
+The loss function is given by the following using the adjusted rand index:
+\begin{equation*}
+l=\sum_{i=1}^n\Theta(\hat{y}_i=y_i)
+\end{equation*}
+
+\item[Risk function]
+The risk function is simply thee expected value of the loss function:
+\begin{equation*}
+	R=E\{l\}
+\end{equation*}
+\end{description}
+\end{document}
