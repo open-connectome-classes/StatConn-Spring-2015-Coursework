@@ -1,0 +1,20 @@
+
+\documentclass[12pt]{iopart}
+%\newcommand{\gguide}{{\it Preparing graphics for IOP journals}}
+%Uncomment next line if AMS fonts required
+\usepackage{iopams}  
+\begin{document}
+
+\center{Statistical Decision Theoretical Problem Statement for Clustering Graph Vertices}
+
+\begin{enumerate}
+\item Sample Space:   ${\cal{G}}_n = ({\cal{A}},{\cal{Y}})$, where ${\cal{A}}\in\{0,1\}^{n\times n}, {\cal{Y}}\in\{0,1\}^n$, $n =$ number of vertices; Ex:  $n=4$. 
+\item Model:  $SBM_{n}^{k}(\vec{\rho},\vec{\beta})$, where $\vec{\rho}$ are regions and $\vec{\beta}$ are Bernoulli $p$'s associated with each region $k$: $\vec{\rho}\in\Delta_{k}$, $\vec{\beta}\in(0,1)^{k\times k}$; Ex:  $SBM_{4}^{2}(\vec{\rho},\vec{\beta})$, $\vec{\rho}\in\Delta_{2}$, $\vec{\beta}\in(0,1)^{2\times 2}$.
+\item Action Space:  ${\cal{A}} = \{y\in\{0,1\}^n\}$; Ex:  ${\cal{A}} = \{y\in\{0,1\}^4\}$, i.e., indexing a 4-tuple by the vertices. 
+\item Decision Rule:  $\phi = \phi({\cal{G}}_n)\rightarrow \cal{A}$; Ex:  $\phi$ is the k-means clustering function in Matlab.
+\item Loss function:  $l:  {\cal{G}}_n \times {\cal{A}}\rightarrow \mathbb{R}_+$, where $l$ is the cost of each decision, e.g., a weighted probability of that decision; Ex:  for k-means clustering, the loss $l$ is the length of distances when putting a point in one cluster versus another cluster.  Adjusted Rand Index ($ARI$) is another cluster validation analysis approach, measuring similarity between two partitions.
+\item Risk function:  ${\cal{P}}\times{\cal{L}}\rightarrow\mathbb{R}_+$; Ex:  $E[l]$.
+\end{enumerate}
+
+\end{document}
+
