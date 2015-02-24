@@ -1,0 +1,34 @@
+\documentclass[12pt]{article}
+\usepackage[left=0.8in,right=0.8in,top=0.7in, bottom=0in]{geometry}
+\geometry{letterpaper}     
+\usepackage[hyphens]{url}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{epstopdf}
+\usepackage{url}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Statistical Connectomics: Sample space and model parameter assignment for Bock11 dataset}
+\author{Greg Kiar}
+\begin{document}
+\pagenumbering{gobble}
+\setlength{\voffset}{-0.5in}
+\setlength{\headsep}{5pt}
+\maketitle
+\vspace{-1cm}
+\section*{Overview}
+As presented last lecture, the Bock11 paper seeks to understand if relationship exists between prefered orientation of V1 neurons and patterning of resulting synapses. Here, our sample space is defined as $\mathscr{G} _n= (V, \mathscr{X}, \mathscr{Y}, \mathscr{Z})$. We define $V=[n]$ as the set of nodes, or neurons, in the graph. $\mathscr{X} = (0, 1)^{n\times n}$ is the collection of edges between nodes, and $\mathscr{Y} = (0,1)^{n}$ describes the polarity (inhibi/excitatory) of the neuron for outgoing synapses. $\mathscr{Z}$ is the prefered orientation angle of a given neuron, and remains to be defined mathetmatically. The model chosen for this statistical theoretic model is $SBM_n^k = (\vec{\rho}(z), \beta(z))$. Here, we are tasked with assigning not only $\mathscr{Z}$, but the block model parameters $\vec{\rho}$, $\beta$ which act on $z \in \mathscr{Z}$.
+
+\subsection*{Prefered orientation space, $\mathscr{Z}$}
+The data collected for this study tested prefered orientation of neurons and disretized the results to $8$ bins evenly spaced across ${0^o, 180^o}$ of rotation. In order to achieve a higher resolution, we will instead suggest a space of $16$ bins, since [state fancy reason for more bins here].
+
+\subsection*{Block model distribution parameters}
+For this data, we set $k=17$: one block for each prefered orientation angle as well as another for inhibitory neurons which showed no preference. Then, $\rho: \mathscr{Z} \to \Delta_{17}$. The distribution $\beta$ of edges in this model dependent on $z$, in the simplest case (which we will go with) is a bernouli distribution independent of $z$. $\therefore \beta = (0,1)^{k \times k}$.
+
+
+\end{document}  
