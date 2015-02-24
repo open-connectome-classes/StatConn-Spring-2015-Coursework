@@ -1,0 +1,22 @@
+
+\documentclass[12pt]{iopart}
+%\newcommand{\gguide}{{\it Preparing graphics for IOP journals}}
+%Uncomment next line if AMS fonts required
+\usepackage{iopams}  
+\begin{document}
+Null hypothesis:  ``Inhibitory interneurons receive dense, convergent input from nearby excitatory neurons with widely varying preferred stimulus orientation."
+\newline
+\newline
+Two Potential Null Models:  
+\begin{enumerate}
+\item No dependence on distance or preferred stimulus orientation:  $SBM_{n}^{k}(\vec{\rho},\vec{\beta})$, where $\vec{\rho}$ are regions and $\vec{\beta}$ are the connectivity probabilities in each region, in this case Bernoulli $p$'s associated with each region $k$: $\vec{\rho}\in\Delta_{k}$, $\vec{\beta}\in(0,1)^{k\times k}$; Ex:  $SBM_{4}^{2}(\vec{\rho},\vec{\beta})$, $\vec{\rho}\in\Delta_{2}$, $\vec{\beta}\in(0,1)^{2\times 2}$, where $k=1$ is cluster of excitatory neurons, $k=2$ is cluster of inhibitory interneurons, $\beta(1,1) = p_{11}$, $\beta(1,2) = p_{12}$, $\beta(2,1) = p_{21}$, $\beta(2,2) = p_{22}$.
+\item Dependence on distance and no dependence on preferred stimulus orientation:  Ex:  $SBM_{4}^{2}(\vec{\rho},\vec{\beta}(\vec{x}))$,  $\vec{\rho}\in\Delta_{2}$, $\vec{\beta}(\vec{x})$, where $\vec{x}\in\mathbb{R}^3$, is either a function of neuron location $\vec{x}$ (connectivity probability between each cluster) or Bernoulli $p$'s, i.e. $\in(0,1)$, (connectivity probability within each cluster), where $\beta(1,1) = p_{11}$ (apply Bernoulli), $\beta(1,2)_{ij} = Ke^{-d(E_i,I_j)}$ (apply thresholding), $\beta(2,1)_{ij} = Ke^{-d(E_i,I_j)}$ (thresholding), $\beta(2,2) = p_{22}$ (Bernoulli), where $d(E_i,I_j)$ is distance (Euclidean or Mahalanobis) between excitatory neuron $E_i$ and inhibitory interneuron $I_j$, $k=1$ is cluster of excitatory neurons, $k=2$ is cluster of inhibitory interneurons, and $K$ is some scale factor.
+\end{enumerate}
+Two Corresponding Alternate Models:  
+\begin{enumerate}
+\item No dependence on distance but dependence on preferred stimulus orientation:  $SBM_{4}^{2}(\vec{\rho},\vec{\beta}(z_{ij}))$, $\vec{\rho}\in\Delta_{2}$, $\vec{\beta}(z_{ij})$, where $z_{ij}\in(0,2\pi)$, is either a function of preferred stimulus orientation $z_{ij}$ (connectivity probability between each cluster) or Bernoulli $p$'s, i.e. $\in(0,1)$, (connectivity probability within each cluster), where $\beta(1,1) = p_{11}$, $\beta(1,2)_{ij} = Ke^{-d(z_{ij},z_{\neq i,j})}$ given some $E_{\neq i}$ and $I_j$ already have a connection, $\beta(2,1)_{ij} = Ke^{-d(z_{ij},z_{\neq i,j})}$ given some $E_{\neq i}$ and $I_j$ already have a connection (threshold), $\beta(2,2) = p_{22}$, where $d(z_{ij},z_{\neq i,j})$ is some cosine distance between preferred orientation angles of $E_i$ and $E_{\neq i}$ for some $I_j$, $k=1$ is excitatory neuron cluster, $k=2$ is inhibitory neuron cluster, and $K$ is scale factor.
+\item Dependence on distance and dependence on preferred stimulus orientation:  $SBM_{4}^{2}(\vec{\rho},\vec{\beta}(\vec{x},z_{ij}))$, $\vec{\rho}\in\Delta_{2}$, $\vec{\beta}(\vec{x},z_{ij})$,  where $\vec{x}\in\mathbb{R}^3$ and $z_{ij}\in(0,2\pi)$, is either a function of neuron location $\vec{x}$ and preferred stimulus orientation $z_{ij}$ (connectivity probability between each cluster) or Bernoulli $p$'s, i.e. $\in(0,1)$, (connectivity probability within each cluster), where $\beta(1,1) = p_{11}$, $\beta(1,2)_{ij} = Ke^{-d(E_i,I_j)}e^{-d(z_{ij},z_{\neq i,j})}$ given some $E_{\neq i}$ and $I_j$ already have a connection, $\beta(2,1)_{ij} = Ke^{-d(E_i,I_j)}e^{-d(z_{ij},z_{\neq i,j})}$ given some $E_{\neq i}$ and $I_j$ already have a connection, $\beta(2,2) = p_{22}$, where $d(E_i,I_j)$ is distance (Euclidean or Mahalanobis) between excitatory neuron $E_i$ and inhibitory interneuron $I_j$ and $d(z_{ij},z_{\neq i,j})$ is some cosine distance between preferred orientation angles of $E_i$ and $E_{\neq i}$ for some $I_j$, $k=1$ is cluster of excitatory neurons, $k=2$ is cluster of inhibitory interneurons, and $K$ is some scale factor.
+\newline
+\end{enumerate}
+\end{document}
+
