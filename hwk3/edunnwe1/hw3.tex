@@ -1,0 +1,34 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts,amsthm}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+\usepackage[pdftex]{graphicx}
+\usepackage{gensymb}
+
+
+%--------Meta Data: Fill in your info------
+\title{Homework 3}
+
+\author{Erika Dunn-Weiss}
+
+\date{Feb 24, 2015}
+
+\begin{document}
+
+\maketitle
+
+\section{Givens}
+\subsection{Sample space} The sample space is given as $\Omega$ = $\mathcal{X} \times \mathcal{Y} \times \mathcal{Z}$
+where $\mathcal{X}$ = $(0,1)^{n \times n}$ describes the connectivity between the network of neurons (the adjacency matrix), $\mathcal{Y}$ = $\{0,1\}^n$ describes whether the synapse is excitatory or inhibitory and $\mathcal{Z}$ describes the tuning properties of the neuron. $\Omega \subseteq \mathcal{G}_n$
+\subsection{Model} The model is given to be a stochastic block model $SBM^2_n(\rho, \beta)$ = $\{P_\theta : \theta \in \Theta\}$ for $\Theta = \triangle_k \times (0,1)^k$. In this case the 0-cluster refers to inhibitory cells and the 1-cluster refers to excitatory cells (based on cell morphology). 
+
+\section{Definition of $\mathcal{Z}$} The tuning of neurons is defined over the interval $(0,2\pi)$, but it may be useful to consider a discretization to reduce the variance in measurements, though this increases the bias of our model. Here we propose $\mathcal{Z}$ =  $\{0,1,2,...k\}^n$ for $k = 24$, thus binning the preferred orientation into bins of 15$\degree$, where the 0 bin indicates unselective.
+
+\section{Definition of $\rho$} Were $\rho$ to depend on $\mathcal{Z}$, this would mean that the probability that a given neuron is inhibitory depends on the preferred orientation of the neuron. This is somewhat true in the sense that if the neuron is inhibitory then it is unselective and will have no preferred orientation. Thus we define the map $\rho: \mathcal{Z} \rightarrow  \triangle_k$ such that the probability of a neuron being inhibitory is $\rho(z \in \mathcal{Z}) = 1$ for $z = 0$ and 0 otherwise. 
+
+\section{Definition of $\beta$} Were $\beta$ to depend on $\mathcal{Z}$, this would mean that the probability that a given neuron has an excitatory or inhibitory post synaptic target depends on the preferred orientation of the neuron, since $\beta$ describes the probability of an edge between elements in the excitatory and inhibitory clusters. Since the paper specifically states that inhibitory neurons receive projections from excitatory neurons of many different preferred orientations, and that in fact the preferred orientation of a neuron is not a good predictor of the post synaptic target compared to the geometry of the cells configuration in space, we do not define a dependent relationship of $\beta$ on $\mathcal{Z}$.  
+
+\end{document}
