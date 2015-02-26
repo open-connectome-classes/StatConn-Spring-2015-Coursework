@@ -1,0 +1,33 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}  % set the margins to 1in on all sides
+\usepackage{amsmath}               % great math stuff
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{graphicx}              % to include figures
+\usepackage{amsfonts}              % for blackboard bold, etc
+\usepackage{amsthm}                % better theorem environments
+
+\newcommand{\multibinom}[2]{
+    \left(\!\middle(\genfrac{}{}{0pt}{}{#1}{#2}\middle)\!\right)
+}
+
+\begin{document}
+\title{Statistical Connectomics HW \#3}
+\author{Rohit Gummi}
+\maketitle
+\subsection*{The Model}
+\emph{Sample Space:} $\Xi_n=\mathcal{X} \times \mathcal{Y} \times \mathcal{Z}$
+\\Here, $\mathcal{X}=(0,1)^{n \times n}$ and is all the graphs with n nodes/neurons. $\mathcal{Y}=\{I,E\}^n$ is the categorization of each neuron (excitatory or inhibitory). $\mathcal{Z}$  is the distribution of the tuning properties. We can look at multiple possibilities for defining $\mathcal{Z}$.
+\\
+\\The model we chose to use was a stochastic block model, $SBM(\rho (\mathcal{Z}),\beta (\mathcal{Z}))$.
+\\
+\\\subsection*{Defining for $\mathcal{Z}$}
+$\mathcal{Z}$ could be $(0,2\pi)^n$ or $[8]^n$ as in the block paper. Another possibility could be to have it based on other factors where the model is: 
+\\ $\mathcal{Z}=(0,1)^{18 \times n}$. Each node has 18 weights ranging from 0 to 1. The 18 numbers reflect the response to 18 range of angles, so a weight for the average response to angles $(0,10]$, a weight for $(10,20]$\ldots$(170, 180]$.
+\\This is still coarse but it also captures some of the continuous changes over the range of angles.
+\\
+\\\subsection*{The Parameters, $\rho$ and $\beta$}
+For $\rho \in \Delta_{18}$, we can define $\rho: z \to \Delta$ where each neuron is mapped to a group based on where which $10$ degrees has the largest average response. 
+\\In the case of $\beta \in (0,1)^{n \times n}$, it would still be independent of $\matchal{Z}$. The responses of the neurons would have to be independent of the connections. It could just be defined by a Bernoulli distribution.
+\end{document}
