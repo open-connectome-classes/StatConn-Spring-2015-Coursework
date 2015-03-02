@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage[margin=1.2in]{geometry}
+\author{Michael Norris}
+\begin{document}
+\newcommand{\tab}{\hspace*{2em}}
+\noindent Michael Norris\\
+This is a statistical formulation of the Expected Brain Graph from the Sporn
+paper \cite{sporn05a}.
+
+\section{Sample Space}
+The sample space is just a graph.\\
+$\Xi_{n} = A_{n} = \left\{0, 1\right\}^{n \times n}$\\
+
+\section{Model}
+The model is what we are trying to measure -- the distribution of brain graphs.
+$P = \left\{P_{\theta} : \theta \in \Theta\right\}$\\
+
+\section{Action Space}
+$(0, 1)^{n \times n}$
+There are $n^{2}$ probabilities, with one associated with each edge.\\
+
+\section{Decision Rule}
+$(x \sim N(\mu, \epsilon))$
+
+\section{Loss Function}
+The loss function is the mean square error.\\
+$\ell : A^{m} \times \Theta \rightarrow \mathbb{R}^{+}$\\
+$\sum_{u, v}(a_{u, v} - p_{u,v})^{2}$\\
+
+\section{Risk Function}
+The risk function is the standard: the expected value of the loss:\\
+$E[\ell]$\\
+
+\begin{thebibliography}{9}
+\bibitem{sporn05a}
+Sporns O, Tononi G, Kötter R (2005) The Human Connectome: A Structural
+Description of the Human Brain. PLoS Comput Biol 1(4): e42.
+doi:10.1371/journal.pcbi.0010042
+
+\end{thebibliography}
+
+\end{document}
