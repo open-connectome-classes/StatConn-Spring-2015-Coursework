@@ -1,0 +1,77 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts,amsthm}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+\usepackage[pdftex]{graphicx}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+\makeatletter
+\let\c@equation\c@thm
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+
+%--------Meta Data: Fill in your info------
+\title{Mean connectome}
+
+\author{Erika Dunn-Weiss}
+
+\date{Mar 2, 2015}
+
+\begin{document}
+\maketitle
+
+\section{Posed Statistical Decision Theoretic}
+This is an attempt to follow my notes from class and replicate what we discussed. 
+
+\subsection{Sample Space}
+$\Omega = \mathcal{A}_n = \{0,1\}^{n\times n}$, the set of adjacency matrices $\mathcal{A}_n$ on graphs $\mathcal{G}_n = (V,E,Y)$.
+
+\subsection{Model}
+$P = SBM^k_n(\rho, \beta)$. We posit the probability of an edge between $u,v$ is given by $P(u \sim v) = P_{uv}$ and the distribution of edges between any pair of vertices $u,v$ is $a_{u,v} \sim Bern(P_{uv})$
+
+\subsection{Action Space}
+$A = (0,1)^n \subseteq \Theta$, where $\Theta$ is the parameter space. This is desirable since this is a parameter estimation problem. 
+
+\subsection{Decision Rule Class} 
+The decision rule is to minimize the loss defined by the loss function below. 
+
+\subsection{Loss Function}
+$l : \Theta \times A \to \mathbb R_{> 0} $ where $l(\theta,\delta(\Omega))$ is the cost of action $\delta$ under parameter $\theta$. More explicitly, $l(\theta, \delta(\Omega)) = \prod_{u v} \hat{P_{uv}} ^{a_{uv}} (1 - \hat{P_{uv}}^{1 - a_{uv}})$, where $\hat{P_{uv}} = \frac{1}{m} \sum^m a_{uv} + \frac{\epsilon}{m^2}$ such that $\frac{\epsilon}{m^2} \leftarrow 0$ asymptotically. Since $P_{uv}\in [0,1]$, you have issues at the boundaries when $P_{u v} $ = 0 or 1, as the whole estimation becomes zero probability. Thus the use of $\hat{P}$ is a necessary smoothing. 
+
+\subsection{Risk Function}
+$R(\theta, \delta) = E_{p}(L(\theta,\delta(\Omega)))$. The risk function is taken as the expected loss.
+
+
+
+ 
+ \end{document}
