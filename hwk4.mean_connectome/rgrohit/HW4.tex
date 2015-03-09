@@ -1,0 +1,35 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}  % set the margins to 1in on all sides
+\usepackage{amsmath}               % great math stuff
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{graphicx}              % to include figures
+\usepackage{amsfonts}              % for blackboard bold, etc
+\usepackage{amsthm}                % better theorem environments
+
+\newcommand{\multibinom}[2]{
+    \left(\!\middle(\genfrac{}{}{0pt}{}{#1}{#2}\middle)\!\right)
+}
+
+\begin{document}
+\title{Statistical Connectomics HW $\#4$}
+\author{Rohit Gummi}
+\maketitle
+\subsection*{Mean Connectome}
+\textbf{Sample Space:} $A=\{0,1\}^{n \times n}$
+\\The set of n by n matrices where each entry represents the existence of a connection between the two subsequentnt nodes.
+\\
+\\\textbf{Model:} $A_{ij} \sim Bernoulli(P_ij)$ 
+\\Where $P=\{P_\theta : \theta \in \Theta\}$
+\\Estimate the connections between two nodes as a Bernoulli
+\\
+\\\textbf{Action Space:} $(0,1)^{n \times m}$
+\\0 indicates that there is no edge and 1 indicates that there is an edge.
+\\
+\\\textbf{Decision Rule:} $\hat{P}=\frac{1}{m}\sum_1^m A^i$
+\\
+\\\textbf{Loss:} $l:A^n \times \Theta \Rightarrow \mathbb{R}$
+\\
+\\\textbf{Risk:} $E[l]$
+\end{document}
