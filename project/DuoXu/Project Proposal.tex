@@ -1,0 +1,95 @@
+\documentclass{article}
+
+\usepackage{lipsum}
+\usepackage[margin=1in,includefoot]{geometry}
+
+% Header and Footage Stuff
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\renewcommand{\headrulewidth\}{0pt}
+\renewcommand{\footrulewidth\}{0pt}
+
+% Bullet Preamble
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\circ$}
+\renewcommand{\labelitemiii}{$\diamond$}
+
+% Math Preamble
+\usepackage{xfrac} % For slanted fracs
+
+
+\begin{document}
+
+\begin{titlepage}
+
+	\begin{center}
+		\line(1,0){500} \\
+		[4mm]
+		\huge{\bfseries EN.580.694: Statistical Connectomics \\
+		Final Project Proposal} \\
+		[1mm]
+		\line(1,0){300} \\
+		[1cm]
+		\textsc{\LARGE } Understanding the Functional Organization \\
+		of Neuronal Populations for \\
+		Encoding Different Behavioral States\\
+		[9cm]
+	\end{center}
+	\begin{flushright}
+		\textsc
+		{\large Duo Xu \\
+		Neuroscience Ph.D. Program, SOM \\
+		March 30, 2015 \\}
+	\end{flushright}
+
+\end{titlepage}
+
+
+\section{Opportunity}
+
+Information in the nervous system can be encoded in activities of neuronal ensembles in addition to those of single neurons. These ensemble activities may directly represent perceptual objects in a distributed fashion or provide an organized substrate for downstream processing. Recent developments in single-unit electrode array recording and two-photon calcium imaging have provided the possibility to record hundreds or even thousands single neuron activities at, or almost at, the same time in behaving animals. These technologies have provided us great opportunities to explore the properties of neuronal ensembles in behaving animals and/or to test hypothesized neural algorithm with experimentally observed data. 
+
+
+\section{Challenge}
+
+In order to determine what information, such as behavioral states, is encoded in a population of neurons, a common approach is using machine learning algorithms to decode behavioral states from recorded activities. However, such analysis is usually unable to reveal the underlying organization and computational principle of the ensembles. Specifically, the data used in this project was obtained by two-photon calcium imaging of populations of layer 2/3 neurons in mice barrel cortex (part of primary sensory cortex where each barrel primarily receives input from one whisker) when animals were performing a whisker stimulation detection task with reward to the correct response. To represent different behavioral states including correct, missing, and false positive detection with corresponding reward outcomes, does the observed neuronal population encode the states information collectively, or only a subset of neurons is encoding, or different subsets of neurons encode different states independently? To answer these questions, an analysis applicable to such high dimensional data while being able to preserve the intrinsic structure would be of great value. 
+
+\section{Action}
+
+Graphs are generated from recorded population activities according to certain criteria. Stochastic Blocks Model (SBM) is used to model the intrinsic organization of neuronal subpopulations where different cluster numbers represent different hypothesized number of subpopulations. Statistical tests will be performed to evaluate which model best explains different behavioral states and how many states does such organization encodes. Furthermore, the resulting functional clusters can be mapped back to original imaging data for exploring the anatomical-functional relationships. 
+
+
+\section{Resolution}
+
+The anatomical-functional organization of neurons in a defined cortical area can be extracted and examined. We will also see, given such organization, what behavioral states can be represented in primary sensory cortex and what may not be. 
+
+
+\section{Future}
+
+The formation of a representation in neuronal ensemble may evolve through different stages. Being able to characterize this process is crucial for gaining insight about the dynamics of neural networks. Statistical graph models that incorporate temporal information will be very useful to reveal the progression of representations - from stimulus detection to choice value and eventually to action. 
+
+
+\section{Statistical Decision Theoretic}
+
+\subsection{Sample Space}
+There are $n=3$ behavioral states. Each graph $\mathscr{G}_s(V, E, Y), s \in \{1,...,n\}$ is obtained from the average of neuronal responses of one state, where each vertex is a neuron and each edge is certain form of correlation of corresponding neuronal pair. Y is the vertex attributes containing the anatomical position of each neurons. 
+
+\subsection{Model}
+$SBM^{k}(\rho, \beta)$ : 
+$\rho \in \Delta_{k}$, 
+$\beta \in (0,1)^{k \times k}$
+
+\subsection{Decision Rule Class & Action Space}
+For each hypothesized cluster number $k_i$, certain clustering algorithm is used to output cluster labels of vertices in action space, $A=\{ y=\{0,1,…,k_i\}^n \}$, based on the input of the adjacency matrix of $\mathscr{G}_s$. 
+
+\subsection{Loss Function}
+The likelihood, $L(\mathscr{G}_{s_i}|\rho_{s_j}, \beta_{s_j}), s_i, s_j \in \{1,...,n\}$, that the graph of behavioral state $s_i$, is drawn from the $SBM$ that fits the behavioral state $s_j$. 
+
+\subsection{Risk Function}
+$R=E(L)=\sum\limit_{s_i=1}^{n} \sum\limit_{s_j=1}^{n}{L(\mathscr{G}_{s_i} | \rho_{s_j}, \beta_{s_j})}$, where $n$ is the total number of behavioral states.
+
+
+
+
+\end{document}

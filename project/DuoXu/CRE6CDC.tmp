@@ -1,0 +1,37 @@
+\documentclass{article}
+
+\usepackage{lipsum}
+\usepackage[margin=1in,includefoot]{geometry}
+
+\begin{document}
+
+\begin{titlepage}
+
+	\begin{center}
+		\line(1,0){300} \\
+		[4mm]
+		\huge{\bfseries Project Proposal} \\
+		[1mm]
+		\line(1,0){200} \\
+		[1cm]
+		\textsc{\LARGE } Statistical Graph Analysis\\
+		[0.5cm]
+		\textsc{\Large On In Vivo Two-photon Imaging Data} \\
+		[9cm]
+	\end{center}
+	\begin{flushright}
+		\textsc
+		{\large Duo Xu \\
+		Neuroscience Ph.D. Program, SOM \\
+		March 30, 2015 \\}
+	\end{flushright}
+
+\end{titlepage}
+
+\section{Introduction}\label{sec:intro}
+This is the first line of the report.
+
+This report ...
+
+
+\end{document}
