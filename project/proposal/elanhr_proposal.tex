@@ -72,38 +72,36 @@ While I think this would definitely be a useful approach to validating/improving
 \subsection*{Statistical Decision Theoretic}
 %Each subject has a value $s$, where $m$ is the total number of subjects, meaning that $2 \times m$ is the total number of graphs. The large graph for each subject, $G_s$, with nodes $V_s$ and edges $E_s$ is parcellated by an atlas, $k_i$, and produces the resulting small graph with labels $Y_S$. The decision rule class, for which the several methods have yet to be set, will determine the similarity between graphs. The loss is determined by incorrect matching of a graph to the same subject, and the risk is the expected loss over the space of all graphs.
 
-We start with an adjacency matrix A from I2g (either weighted indicating likelihood or 
+We start with an adjacency matrix A from i2g to which we add edges resulting in A'. From this we convert to a random weighted adjacency matrix W. We then select K  input neurons to probe for and L neurons to probe for outputs.
 
 \begin{description}
 
-\item[Sample Space] $(A, X, Y) \in \mathcal{A}_N \times \mathcal{P}_N = \mathscr{G}_N $, where 
- Adjacency Matrices: $A = \{0,1\}^{N \times N}$
-and
-Vertex Positions: $P= \{P_i\}$, where $P_i = (x_i,y_i,z_i) \in \mathbb{R}^3$.
+\item[Sample Space] $(W, X, Y) \in \mathcal{W}_N \times \mathcal{R}^K  \times \mathcal{R}^L $, where 
+Weighted Adjacency Matrices: $\mathcal{W}_N = \mathcal{R}^{N \times N}$
 
 \item[Model]
-$  
-\{SBM^{k_i}_N (\rho, \beta):$ 
-$\rho \in \Delta_{k_i}$ 
-$\beta \in (0,1)^{k_i \times k_i} \}$
+%$  
+%\{SBM^{k_i}_N (\rho, \beta):$ 
+%$\rho \in \Delta_{k_i}$ 
+%$\beta \in (0,1)^{k_i \times k_i} \}$
 
 \item[Action Space]
 
-$ \mathcal{W}_{n} \times \mathcal{W}_{n}$, where 
-$W \in \mathcal{Z}^{n \times n}$, 
-$\forall$ n corresponding to three different atlases,
-$\{Desikan, {Destrieux}, {DKT}\}$, and $\mathcal{Z} = \{0,1,2,...\}$.  In words, $W$ is a weighted adjacency matrix.
+%$ \mathcal{W}_{n} \times \mathcal{W}_{n}$, where 
+%$W \in \mathcal{Z}^{n \times n}$, 
+%$\forall$ n corresponding to three different atlases,
+%$\{Desikan, {Destrieux}, {DKT}\}$, and $\mathcal{Z} = \{0,1,2,...\}$.  In words, $W$ is a weighted adjacency matrix.
 
 \item[Decision Rule Class]
-$ f: \mathcal{A}_N \to \mathcal{W}_n$
+%$ f: \mathcal{A}_N \to \mathcal{W}_n$
 
 \item[Loss Function]
-$ \ell(\hat{W}^k_i, \hat{W}^k_j) = \lvert \lvert \hat{W}^k_i - \hat{W}^k_j \rvert \rvert^2_F$
+%$ \ell(\hat{W}^k_i, \hat{W}^k_j) = \lvert \lvert \hat{W}^k_i - \hat{W}^k_j \rvert \rvert^2_F$
 
 
 
 \item[Risk Function]
-$ \\ R = E[L] = \sum\limits_{j}^{\mathscr{G}} L(G, G_j) \cdot p(G)$ $/$ $\lvert \mathscr{G} \rvert$
+%$ \\ R = E[L] = \sum\limits_{j}^{\mathscr{G}} L(G, G_j) \cdot p(G)$ $/$ $\lvert \mathscr{G} \rvert$
 
 \end{description}
 
