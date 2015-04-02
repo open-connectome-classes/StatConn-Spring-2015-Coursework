@@ -1,0 +1,51 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+
+\title{Decision Theroetic for Mean Connectome}
+\author{akim1}
+\date{March 3, 2015}
+
+\begin{document}
+\maketitle
+
+\begin{description}
+\item[Sample space]
+The sample space is given by the adjacency matrix:
+\begin{equation*}
+A=\{0,1\}^{n\times n}
+\end{equation*}
+
+\item[Model]
+The model for the existence of an edge is given by the Bernoulli.
+\begin{equation*}
+A_{uv}\sim\mathit{Bern}(p_{uv})
+\end{equation*}
+
+\item[Action space]
+Action space is the parameter space of the Bernoulli distribution:
+\begin{equation*}
+\mathscr{A}=[0,1]^{n\times n}
+\end{equation*}
+The average represents the probability of an edge existing.
+
+\item[Decision rule class]
+The decision rule class is to maximize the loss function.
+
+\item[Loss]
+The loss function is given by the likelihood of the Bernoulli:
+\begin{equation*}
+l_{uv}=\prod p_{uv}^{a_{uv}}(1-p_{uv})^{1-a_uv}+\epsilon/m^2
+\end{equation*}
+where $a_{uv}$ is the number of occurrences of an edge being observed. The last
+term is a factor to account for the fact that likelihood is zero when the
+probability is 0 or 1.
+
+\item[Risk]
+As previously, the risk is defined as the expectation value of the los.
+\begin{equation*}
+E\{l_{uv}\}
+\end{equation*}
+\end{description}
+\end{document}
