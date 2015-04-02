@@ -1,0 +1,110 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\geometry{letterpaper}                  
+\usepackage{graphicx}
+\usepackage[hyphens]{url}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{fixltx2e}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{url}
+\usepackage[normalem]{ulem}
+\usepackage[pdftex]{color}
+\usepackage{varioref}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\labelformat{equation}{\textup{(#1)}}
+\usepackage[sort&compress,colon,square,numbers]{natbib}
+
+
+\usepackage{color}
+\newcommand{\todo}[1]{{\color{red}{\it TODO: #1}}}
+\newcommand{\jovo}[1]{{\color{green}{\it jovo: #1}}}
+\newcommand{\will}[1]{{\color{blue}{\it will: #1}}}
+\newcommand{\greg}[1]{{\color{cyan}{\it greg: #1}}}
+
+
+\begin{document}
+
+\begin{center}\Large \bf EN.580.694: Statistical Connectomics \\ Final Project Proposal \end{center}
+\begin{center} Elan Hourticolon-Retzler $\cdot$  \today \end{center}
+\bigskip
+
+%\section*{Searching for a brain parcellation atlas which maximizes test-retest reliability of same-subject MR connectomes}
+
+\section*{Repairing Connectome Estimations by Learning Latent Synapse Strengths.} % Title likely to change
+
+\paragraph{Opportunity}
+%As a current state of the art, human connectomes can be estimated from Diffusion Weighted MR imaging (DWI, dMRI, DTI) and structural MR imaging (sMRI, MPRAGE). When estimating these connectomes, an argument can be made that voxel-level artifacts and imperfect registration procedures cause sufficient noise that full scale graphs are unreliable for node-wise analysis.  For this reason, so-called small graphs can be produced which combine nodes in the full graphs, voxels in the structural image, into defined regions. These region sets are termed atlases.
+
+I2G has shown that we can probabilistically infer neural structure automatically from images albeit with significant noise.
+
+\paragraph{Challenge}
+%The atlases used are defined often with knowledge of functional or physiological data \todo{cite}, without knowledge of structural connectivity data. As a result, it is difficult to know whether or not an atlas is an appropriate or useful parcellation of the brain for connectomics purposes. When analyzing the performance of these partitions for such connectivity data, difficult graph statistics must be employed.
+
+Despite I2G greatly decreasing the time and effort of extracting structure , validating them in a meaningful and consistent manner is still an open problem. This is because comparing against a biological truth ( a network manually mapped by hand) is cost/time prohibitive while comparing against another estimate is exceedingly noisy and difficult to reason about. 
+
+
+\paragraph{Action}
+%Test-retest (TRT) reliability is a measure which seeks to compare connectomes estimated for the same subject across different scans to the remainder of the dataset. A successful TRT test results in the same subject graphs being more similar to one another than all other graphs. Here, we propose and test several methods TRT in order to evaluate the performance of three commonly used atlases; Desikan \todo{cite}; Destrieux \todo{cite}; DKT \todo{cite}.
+
+To alleviate the burden of manually tracing individual neurons I believe one can achieve comparable results by taking the much simpler approach of testing inputs/outputs at marked neurons across large swaths of the network and then adjusting our estimate based on the results. 
+
+To use this approach we would take our initial estimate and add edges that were possibly lost in our I2G estimation. From this point we add random weights to all our edges to represent synapse connection strength. We then learn weights based on our inputs/outputs at our marked neurons. Given enough data this leaves us with a network that is a functional approximation of our true network.  To turn this once again into a structural approximation we can take 2 approaches: (1) remove edges with weights less than $\epsilon$ and (2) resample our functional network N times by selecting different initial starting weights/relearning and then taking a weighted average before thresholding. 
+
+
+\paragraph{Resolution}
+%We will gain insight into which of the tested atlases best partitions estimated connectomes, and thus which atlas should be used to assess the quality of estimation and for basic classification tasks. We will also see which TRT metric is best suited for comparing the resulting connectomes.
+
+This method hopes to improve performance of structure estimation with the addition limited functional 
+
+\paragraph{Future Work}
+%One likely difficulty of this project will be developing TRT metrics that are not biased heavily by sparse data (few edges within the graph). As we seek to answer two questions, it may be possible to gain more insightful solutions by attempting to answer each question independently in future.
+
+While I think this would definitely be a useful approach to validating/improving a network estimation I feel that for my results to be meaningful I will need to test them against an actual neural network with the described input/output pairs. Unfortunately I have yet to find such a dataset (though I am still on the lookout) and will likely be working with simulated graphs/data.
+
+\pagebreak
+
+
+\subsection*{Statistical Decision Theoretic}
+%Each subject has a value $s$, where $m$ is the total number of subjects, meaning that $2 \times m$ is the total number of graphs. The large graph for each subject, $G_s$, with nodes $V_s$ and edges $E_s$ is parcellated by an atlas, $k_i$, and produces the resulting small graph with labels $Y_S$. The decision rule class, for which the several methods have yet to be set, will determine the similarity between graphs. The loss is determined by incorrect matching of a graph to the same subject, and the risk is the expected loss over the space of all graphs.
+
+We start with an adjacency matrix A from I2g (either weighted indicating likelihood or 
+
+\begin{description}
+
+\item[Sample Space] $(A, X, Y) \in \mathcal{A}_N \times \mathcal{P}_N = \mathscr{G}_N $, where 
+ Adjacency Matrices: $A = \{0,1\}^{N \times N}$
+and
+Vertex Positions: $P= \{P_i\}$, where $P_i = (x_i,y_i,z_i) \in \mathbb{R}^3$.
+
+\item[Model]
+$  
+\{SBM^{k_i}_N (\rho, \beta):$ 
+$\rho \in \Delta_{k_i}$ 
+$\beta \in (0,1)^{k_i \times k_i} \}$
+
+\item[Action Space]
+
+$ \mathcal{W}_{n} \times \mathcal{W}_{n}$, where 
+$W \in \mathcal{Z}^{n \times n}$, 
+$\forall$ n corresponding to three different atlases,
+$\{Desikan, {Destrieux}, {DKT}\}$, and $\mathcal{Z} = \{0,1,2,...\}$.  In words, $W$ is a weighted adjacency matrix.
+
+\item[Decision Rule Class]
+$ f: \mathcal{A}_N \to \mathcal{W}_n$
+
+\item[Loss Function]
+$ \ell(\hat{W}^k_i, \hat{W}^k_j) = \lvert \lvert \hat{W}^k_i - \hat{W}^k_j \rvert \rvert^2_F$
+
+
+
+\item[Risk Function]
+$ \\ R = E[L] = \sum\limits_{j}^{\mathscr{G}} L(G, G_j) \cdot p(G)$ $/$ $\lvert \mathscr{G} \rvert$
+
+\end{description}
+
+\end{document}  
