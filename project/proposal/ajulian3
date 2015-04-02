@@ -1,1 +1,39 @@
 
+
+EN.580.694: Statistical Connectomics
+Final Project Proposal
+
+Alan Juliano · April 1, 2015
+
+Maximizing Psychiatric Disorder Detection Across Connectomes 
+
+Opportunity Psychiatric Disorders are incredibly vast in their offerings towards understanding the human connectome. The connectome data can help researchers indicate the presence of abnormal circuitry. Specifically, the data that will be analyzed will be across multiple scales including micro (single neurons and synapses), meso (brain regions and pathways), and macro (neuronal populations and their interconnecting circuitry) data. It would inherently be beneficial for the psychiatry community to use mathematical models along with their medical technique to validate the presence of psychiatric disorders. The indicative biomarkers can be evaluated using spatial analytics. Utilizing both the trained and test data, we are able to use the statistical framework of cross validation to determine the accuracy of the model. The model can help statistically detect the presence of specific disorders and aid in the correct targeted treatment of these disorders.
+
+Challenge Many psychiatry practices use behavioral analysis to determine the presence of a psychiatric disorder. In our case, we would like to quantify the process using a data mining technique. Specifically, we are aiming to train the algorithm to detect a variety of mental disorders using the connectome data alone. If the training and testing data are correctly organized, we will hopefully be able to apply these models across further databases to increase mental health disease detection. 
+
+Action Cross Validation is an important technique in determining whether or not your model is accurate in detection. Specifically, our aim is to train the psychiatric connectome data to accurately detect the presence of a disorder. A successful cross validation test will yield meaningful results if the testing and training set come from the same population. Our hope is to maximize the data offerings to offer proper diagnostics using quantifiable information.  
+
+Resolution We will gain knowledge as to what psychiatric disorders are identified accurately using various cross validation techniques across psychiatric connectome data. Considering the result data is binary, either having a disease or not, we will aim to build a cross validation model that will maximize psychiatric disorder detection. 
+
+Future Work The cross validation method of psychiatric disorder detection will hopefully lead to a more stable diagnostic process within the psychiatric practice. 
+Statistical Decision Theoretic
+
+There are adjacency matrixes, defined by A, and psychiatric disorder biomarkers, defined by G. We will then have to then utilize the SBM model with a block size of 1. The psychiatric disorder biomarker will then be useful in generating a classifier, Y (binary= has the disorder or not). We will then compare the predicted classifier against the actual classifier utilizing the loss function determining accurate and inaccurate detection. Moreover, our risk is the number of expected total misdiagnosis across all graphs. 
+
+Sample Space
+The sample space will be the adjacency matrices, A, along with the spatial biomarkers, Y. A, an adjacency matrix, is a subset of Ay where A = {0,1}^y*y. The sample space includes the interconnectivity of the adjacency matrixes and spatial biomarkers of psychiatric disorder activity. 
+
+Model
+This project requires the usage and modification of a stochastic block model:
+G=SBMYN(c,d) where c is an difference between predicted disease outcome and actual disease outcome and d is a subset of the adjacency matrices (0,1)n*n
+
+Action Space
+Adjacency Matrices, A is an element of [0,1]n*n is the action space to which we are applying the SBM to eventually run our cross validation model. 
+
+
+Decision Class
+F: An  -> Cn
+Loss Function
+L(Ci,Cj)=||C—Cj||2 (goal is to minimize the error in disease diagnosis across the connectome)
+Risk Function
+1/n*Sum(c(ci,di)f(ci) -> expected risk associated with loss function of disease misdiagnosis
