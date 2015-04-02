@@ -1,0 +1,78 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx}
+\usepackage[hyphens]{url}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{fixltx2e}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{url}
+\usepackage[normalem]{ulem}
+\usepackage[pdftex]{color}
+\usepackage{varioref}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\labelformat{equation}{\textup{(#1)}}
+\usepackage[sort&compress,colon,square,numbers]{natbib}
+\usepackage{color}
+\newcommand{\todo}[1]{{\color{red}{\it TODO: #1}}}
+\newcommand{\jovo}[1]{{\color{green}{\it jovo: #1}}}
+\newcommand{\will}[1]{{\color{blue}{\it will: #1}}}
+\newcommand{\greg}[1]{{\color{cyan}{\it greg: #1}}}
+\begin{document}
+\bibliographystyle{plain}
+\begin{center}\Large \bf EN.580.694: Statistical Connectomics \\ Final Project Proposal \end{center}
+\begin{center} Michael Norris $\cdot$ \today \end{center}
+\bigskip
+\section*{Using a Random Dot Product Model to Approximate the (clustering?) of 
+the C. Elegans Connectome}
+\paragraph{Opportunity}
+The Paper by \cite{2014PLoSO...997584P} contains an analysis of ERMM, SBM, [other two methods] for C. Elegans.  There's an opportunity to do the same level analysis comparing
+ERMM as a baseline to a Random Dot Product Graph Model (RDP) on C. Elegans, and 
+comparing the results.  If using this method provides statistically significant results, then it may be a useful tool for connectomics.
+\paragraph{Challenge}
+The challenge to this problem is formulating the problem correctly,
+performing a correct statistical test on the connectome, and validating the
+results.
+
+\paragraph{Action}
+Random Dot Product Graph Model is a graph model that can be used in place of 
+other models.  I will test the Random Dot Product Graph Model using C. Elegans 
+Data.
+\paragraph{Resolution}
+We will show whether the Random Dot Product Graph Model is able to cluster the 
+connectome into similar modules as ERMM.
+\paragraph{Future Work}
+The results of this paper will give insight to when a Random Dot Product Graph 
+Model could be used in a graph statistical problem.
+\pagebreak
+\subsection*{Statistical Decision Theoretic}
+\begin{description}
+\item[Sample Space]
+The sample space is the connectome of C. Elegans.
+\item[Model]
+The model is the RDP Graph Model.  
+ERMM will also be used in a separate test as a comparison.
+\item[Action Space]
+The Action Space is the distribution of all possible Random Dot Product Graphs.
+
+\item[Decision Rule Class]
+The decision rule is block assignments for each vertex.
+
+\item[Loss Function]
+The loss function is the Integrated Classification Likelihood so we can compare
+across different blocks. \cite{2014PLoSO...997584P} equation (7).\\
+$ICL(\mathscr{M}_{q}) = max\log | \mathscr{L}(x, \tilde{z}|\mathscr{M}_{q};\phi) -
+\frac{1}{2}\frac{Q(Q+1)}{2} \log\left[\frac{n(n-1)}{2}\right] - \frac{Q-1}{2}
+\log\left[n\right]$\\
+\item[Risk Function]
+The risk function is the expected value of the loss function 
+$R = E[\mathscr{l}]$.
+
+\end{description}
+\bibliography{master}
+\end{document} 
