@@ -1,0 +1,44 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}  % set the margins to 1in on all sides
+\usepackage{amsmath}               % great math stuff
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{graphicx}              % to include figures
+\usepackage{amsfonts}              % for blackboard bold, etc
+\usepackage{amsthm}                % better theorem environments
+
+\newcommand{\multibinom}[2]{
+    \left(\!\middle(\genfrac{}{}{0pt}{}{#1}{#2}\middle)\!\right)
+}
+
+\begin{document}
+\title{EN.580.694: Statistical Connectomics Final Project Propsal}
+\author{Rohit Gummi}
+\maketitle
+\subsection*{}
+\textbf{Opportunity:} Previous studies have emphasized the modular connectivity of neurons. Different regions seem to have structural differences with microcircuits in each region. An important addition to this knowledge would be how different subtypes of neurons connect. The Fino paper from $2011$ explored this by studying the connections among inhibitory neurons and found extremely dense connectivity among local inhibitory neurons. They concluded that there was a lack of specificity in the connections of inhibitory neurons. Quantifying the amount of or lack of specificity would be helpful in further understanding connections between neurons.
+\\\\\textbf{Challenge:} The graphs of most connectomes lack information on neural subtypes. The problem also requires formulating a definition of a microcircuit or cluster among which you would expect differing connectivity and differentiating them.
+\\\\\textbf{Action:} Given a distribution of tested neurons(nodes), I would look at what would you expect from the resulting graph. Given a graph, is it more likely that one type of neuron targets specific clusters of other neurons or are the connections random. The Fino paper looks at the correlation between connections and specificity which this project would expand on. I would first make a model with connection between neuron subtypes that depending on connectivity within subtypes. This could be used to test the likelihood of certain graphs given true specificities. Then with C. Elegan data, which includes neuron subtype values, I would see if there is any specificity between some subtypes.
+\\\\\textbf{Resolution:}The method will provide a way to test for specificity of certain neurons. It will provide a better idea on whether certain types of neurons have differing targeting probabilities.
+\\\\\textbf{Future Work:}Future data with information on neuron classifications can be used to test connections between different neuronal cell types and circuits.
+\subsection*{Statistical Decision Theoretic}
+\textbf{Sample Space:} $\mathbb{G}=\{V,E,Y\}$
+\\With Y being the type of neuron, most likely choosing between two. $Y \in (0,1)^n$
+\\
+\\\textbf{Model:} $A \in \{0,1\}^{(n_1,n_1+1,n_2)}$
+\\$n_1$ is the number of neurons of type 1 and $n_2$ is the number of neurons of type two. This gives a matrix of connections between all the type 1 neurons and a 3rd dimension which provides information on which type 2 neurons are connected to which type 1 neurons.
+\\
+\\\textbf{Action Space:} The action space is the pairs of the first subtype of neurons and all possible connections with a neuron of the second subtype.
+\\
+\\\textbf{Decision Rule:} $P \in (0,1)^{n_1 \times n_1}$
+\\The probability of each pair of type 1 neurons sharing a connection to a type two neuron.
+\\
+\\\textbf{Loss:} $l=(P_i - \hat{P_i})^2$
+\\Where $\hat{P_i}$ is the true probability of connections between type 1 pairs and type 2 neurons.
+\\
+\\OR?
+\\The liklihood of the sample matrix given the chosen probabilities
+\\
+\\\textbf{Risk:} $E[l]$
+\end{document}
