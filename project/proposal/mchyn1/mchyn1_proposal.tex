@@ -1,0 +1,90 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\geometry{letterpaper}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[normalem]{ulem}
+\usepackage[pdftex]{color}
+\pagestyle{fancy}
+\usepackage{varioref}
+\usepackage{mathrsfs}
+\usepackage[sort&compress,colon,square,numbers]{natbib}
+\usepackage{amssymb}
+
+
+\begin{document}
+\begin{center}
+\Large\bf EN.580.694: Statistical Connectomics \\
+Final Project Proposal
+\end{center}
+\begin{center}
+Michelle Chyn $\cdot$\today
+\end{center}
+
+\bigskip
+
+\section*{Kernel based approach for Connectome Wide Association Studies}
+
+\paragraph{Opportunity}
+Currently there are many separate studies on estimating connectomes of specific disease states or phenotypes such as ADHD, developmental age, IQ, etc.. The next step would be to find voxel connections that are indicators of specific phenotypes and to see what voxelwise connections differ between phenotypes for connectome wide association studies.
+
+\paragraph{Challenge}
+The method used most commonly involved univariate analysis, which was computationally expensive. The novel concept  presented by Shezhad et al. in 2014 was to use multivariate distance matrix regression \cite{Shezhad}, but this method employed the use of a kernel like matrix without taking advantage of the toolbox offered by using kernels.
+
+\paragraph{Action}
+We propose to create a kernel based distance matrix similar to in MDMR and employ kernel based methods for hypothesis testing. This method will take a multivariate data set and compute statistics through dot products in higher dimensional spaces. These results will be compared against what is expected from meta-analysis \cite{Neurosynth}, and  against another data sets to ensure different clusters are being called significant.
+
+\paragraph{Resolution}
+This method will improve on current methods of comparing voxel connections associated with connectomes of specific phenotypes and also take advantage of kernel based methods, which do not need information such as the distribution of the data.
+
+\paragraph{Future Work}
+The original dataset for the MDMR study came with time series data. Possible improvements on the results of this project would be to incorporate time dependence before apply kernel based testing, to apply kernel based testing to connectome wide association studies of more phenotypes, or for structural connectomes.
+
+\pagebreak
+\subsection*{Statistical Decision Theoretic}
+We will take the kernel distance between voxels and form $n, v \times v$ matrices. Then we will compare the distance between voxels between patients. Finally, we will use permutation testing to create a null distribution which we can compare against.
+
+\begin{description}
+
+\item[Sample Space] 
+$\Omega={T \times N \times V \times P}$, where T is the number of time steps, N is the number of participants, V is the number of voxels, and P is the number of phenotypes.
+
+\item[Model]
+$V \times D^{n \times n}$ Distance Matries where $d_{i,j}$ represents kernel distance.
+
+\item[Action Space]
+$\mathcal{H}_0 : P_1 = P_2$,
+$\mathcal{H}_A : P_1 \neq P_2$ \cite{Har}.
+
+\item[Decision Rule Class] Create a null distribution using permuation testing. 
+\\If $\mathcal{T}_n \in R(\alpha)$, decide $\mathcal{H}_0$, if $\mathcal{T}_n \not\in R(\alpha)$, decide $\mathcal{H}_A$, where
+\begin{center}$\mathcal{T}_n = \dfrac{n_1n_2}{n_1 + n_2}{(\hat{D}_2 - \hat{D}_1)}^T{\hat{\Sigma}_W}^{-1}(\hat{D}_2 - \hat{D}_1)$ \end{center}
+and ${\hat{\Sigma}_W}^{-1}$ is the within-sample pooled covariance matrix
+\begin{center}  ${\hat{\Sigma}_W}^{-1} = \dfrac{n_1}{n_1 + n_2} \hat{\Sigma}_1 + \dfrac{n_2}{n_1 + n_2} \hat{\Sigma}_2$ \cite{Har}. \end{center}
+
+\item[Loss Function]
+$\\ \mathcal{P}_{FA} = \mathbb{P}$(decide $\mathcal{H}_A| \mathcal{H}_0$ is true $) = \alpha =$ Type I error,
+$\\ \mathcal{P}_{MD} = \mathbb{P}$(decide $\mathcal{H}_0| \mathcal{H}_A$ is true $) = \pi =$ Type II error.
+
+\item[Risk Function]
+$R = E[L]$
+
+\end{description}
+
+\pagebreak
+
+\begin{thebibliography}{widest entry}
+
+
+\bibitem{Har} Harchaoui, Z., Bach, F., Cappe, O., \& Moulines, E. (2013). Kernel-Based Methods for Hypothesis Testing: A Unified View. \emph{IEEE Signal Processing Magazine}, 87-97.
+\bibitem{Neurosynth} Neurosynth. (n.d.). Retrieved April 1, 2015, from http://neurosynth.org/
+\bibitem{Shezhad} Shehzad, Z., Kelly, C., Reiss, P., Craddock, R., Emerson, J., Mcmahon, K., . . . Milham, M. (2014). A multivariate distance-based analytic framework for connectome-wide association studies. \emph{NeuroImage}, 74-94.
+
+
+\end{thebibliography}
+
+
+\end{document}
