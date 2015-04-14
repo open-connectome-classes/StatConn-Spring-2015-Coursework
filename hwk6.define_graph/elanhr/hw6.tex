@@ -1,0 +1,51 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\geometry{letterpaper}                  
+\usepackage{graphicx}
+\usepackage[hyphens]{url}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{fixltx2e}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{url}
+\usepackage[normalem]{ulem}
+\usepackage[pdftex]{color}
+\usepackage{varioref}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\labelformat{equation}{\textup{(#1)}}
+\usepackage[sort&compress,colon,square,numbers]{natbib}
+
+
+\usepackage{color}
+\newcommand{\todo}[1]{{\color{red}{\it TODO: #1}}}
+\newcommand{\jovo}[1]{{\color{green}{\it jovo: #1}}}
+\newcommand{\will}[1]{{\color{blue}{\it will: #1}}}
+\newcommand{\greg}[1]{{\color{cyan}{\it greg: #1}}}
+
+
+\begin{document}
+
+\begin{center}\Large \bf EN.580.694: Statistical Connectomics \\ Hw 6 - Defining a Graph \end{center}
+\begin{center} Elan Hourticolon-Retzler $\cdot$  \today \end{center}
+\bigskip
+
+%\section*{Searching for a brain parcellation atlas which maximizes test-retest reliability of same-subject MR connectomes}
+
+\section*{Defining a Graph for determining Cycles} 
+
+In class we asked whether it was possible to convert our graph into a simpler graph in order to answer the question of whether we could condition of having a cycle within the graph. 
+
+In class we redefined a graph by using factor cliques. Each node is replaced by a clique containing the factors of the original node plus its Markov blanket. 
+
+In order to define a graph which encodes whether we have cycles of length k, we would need to use nodes that contain the factors of the original node plus the $k^{th}$ order Markov blanket. It is easy to see that cycles of length $>k$ are not encoded in our graph and thus in order to encode whether our graph has arbitrary cycles we would need to consider all factors in the graph which is not useful. 
+
+
+
+
+
+
+\end{document}  
