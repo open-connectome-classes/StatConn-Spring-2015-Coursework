@@ -1,0 +1,26 @@
+
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\geometry{letterpaper} 
+\usepackage{amsmath}
+
+\title{Statistical Connectomics: Homework 6}
+\author{David Lee}
+\date{April 14, 2015}
+
+\begin{document}
+\maketitle
+\paragraph {}
+
+The Fino 2011 paper tries to map the inihibitory connectivity between somastostatin-positive GABAergic interneurons and pyramidal neurons (PCs) in the frontal cortex of a mouse.  To acheive this goal, they labeled somatostostatin-postitive neurons with GFP (sGFPs) and then produced single cell resolution connectivity maps using two-photon mapping technology.  In class we discussed how we could define the graph between sGFPs and PCs.  I believe with the following definitions of nodes and edges, we can possibly make a graph that can well define the connectivity between sGFPs and PCs.
+
+\paragraph {}
+I would redefine the nodes and edges of the graph as the following: Nodes will be sGFPs and PC "blocks."  PC blocks will be defined as a group of PCs cells synaptically connected to each other.  Not every PC has to be connected to all the other PCs in a block; there just has to be at least one PC-to-PC connection between the cells.  Edges will be synaptic connections between sGFPs and PC blocks.  Connections between same cell types (PC to PC connections) will be ignored.  Edges will also be weighted based on distance from 0 to 1 and these weights will define the probability of these connections actually existing.  Connections that are closer will be given higher weights.
+
+\paragraph {}
+The purpose of grouping PCs into blocks is to address the fact that somatostatin interneurons lack innervation selectivity.  As the Fino paper mentions, sGFPs do not form specific subnetworks since they connect to PCs similarly regardless of whether or not the PCs were highly inervated.  This is the same reason why we are uninterested in PC-to-PC connections, because these connections have no bearing on selectivity.  The reasoning behind weighting edges based on distance, is because closer distances have a higher chance of connectivity.   
+
+\paragraph {}
+In conclusion, the following redefined edges and nodes will help us create a useful graph that shows the inhibitory connectivity between sGFPs and PCs.  By lumping PCs and ignoring PC-to-PC connections, we simplify the model by removing redundant features.
+
+\end{document}	
