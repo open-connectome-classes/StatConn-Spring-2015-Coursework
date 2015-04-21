@@ -1,0 +1,33 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx}
+\usepackage[hyphens]{url}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{fixltx2e}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{url}
+\usepackage[normalem]{ulem}
+\usepackage[pdftex]{color}
+\usepackage{varioref}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\labelformat{equation}{\textup{(#1)}}
+\usepackage[sort&compress,colon,square,numbers]{natbib}
+\usepackage{color}
+\newcommand{\todo}[1]{{\color{red}{\it TODO: #1}}}
+\newcommand{\jovo}[1]{{\color{green}{\it jovo: #1}}}
+\newcommand{\will}[1]{{\color{blue}{\it will: #1}}}
+\newcommand{\greg}[1]{{\color{cyan}{\it greg: #1}}}
+\begin{document}
+\begin{center}\Large \bf Redefining Fino Graph \end{center}
+\bigskip
+\paragraph{Redefined Bock Graph}
+The Bock paper ({\it Nature} 2011) studies the functional and structural influences on the anatomical convergence of two excitatory neurons onto an inhibitory interneuron. The functional factors are the preferred orientations of the excitatory neurons, measured by two-photon calcium imaging, and the structural factors are the locations of the inhibitory and excitatory neurons, measured by large-scale electron microscopy. To aid the design of a statistical decision theoretic on this paper, Erika has proposed an alternative to the typical SBM model which characterizes node pair relationships in the entries or edge values in the adjacency matrix, and does not characterize relationships between three nodes. This alternative approach is to construct a graph model such that the nodes are excitatory neurons and each edge in the adjacency matrix signifies whether or not that excitatory neuron pair converges onto an inhibitory neuron. 
+\paragraph{Adaptation to Fino Graph}
+The statistical decision theoretic on the Fino paper ({\it Neuron} 2011) involves the connection selectivity between sGFP and PC cells, and is therefore similar to the theoretic on the Bock paper. The primary difference is that the connections in the Bock paper are two excitatory neurons converging onto an inhibitory neuron, and the connections in the Fino paper are two connected PC cells converging onto an sGFP cell. There is an additional connection (between the PC cells) in the Fino paper. The redefined Bock graph approach extends directly to this scenario, where our graph model is now such that the nodes are PC cells and each edge in the adjacency matrix signifies whether or not that PC cell pair is connected {\uline{and}} converges onto an sGFP cell. 
+\end{document}

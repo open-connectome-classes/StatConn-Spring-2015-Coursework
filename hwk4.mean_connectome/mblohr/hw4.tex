@@ -1,0 +1,51 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx}
+\usepackage[hyphens]{url}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{fixltx2e}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{url}
+\usepackage[normalem]{ulem}
+\usepackage[pdftex]{color}
+\usepackage{varioref}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\labelformat{equation}{\textup{(#1)}}
+\usepackage[sort&compress,colon,square,numbers]{natbib}
+\usepackage{color}
+\newcommand{\todo}[1]{{\color{red}{\it TODO: #1}}}
+\newcommand{\jovo}[1]{{\color{green}{\it jovo: #1}}}
+\newcommand{\will}[1]{{\color{blue}{\it will: #1}}}
+\newcommand{\greg}[1]{{\color{cyan}{\it greg: #1}}}
+\begin{document}
+\begin{center}\Large \bf Finding the Mean Human Connectome \end{center}
+\bigskip
+
+\subsection*{Statistical Decision Theoretic}
+
+\begin{description}
+
+\item[Sample Space]  $\{0,1\}^{n\times n}=\mathcal{A}$
+
+\item[Model] $P(u\sim v) = P_{uv}$,  $a_{uv}\sim Bern(P_{uv})$ 
+
+\item[Action Space]
+$(0,1)^{n\times n} = \Theta$ (mean)
+
+\item[Decision Rule Class]
+$ f: \mathcal{A} \to \Theta$, $f = MSE$
+
+\item[Loss Function]
+$l:  \mathcal{A} \times \Theta \rightarrow \mathbb{R}_+$
+
+\item[Risk Function]
+$  R = E[\ell]$
+\end{description}
+
+\end{document}
