@@ -4,7 +4,7 @@
 % Greg Kiar; Apr 29th, 2015
 %
 %The script must be run from in a directory structured as follows:
-% **(w/ nothing else)**
+% **(w/ other files sure, no other directories)**
 % *(The reason for this is so I can cleanly read in the 168 graphs...)*
 %
 %-Current Directory:
