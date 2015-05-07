@@ -1,0 +1,47 @@
+#----------------------------------------------------------------#
+| CWAS Statistical Sandbox :: Version 1.0                        |
+| Jerry Wang (jwang158@jhu.edu)                                  |
+#----------------------------------------------------------------#
+README
+
+This software attempts to look deeper into the methodologies used in
+the Shehzad 2014 paper on Connectome-Wide Association Studies (CWAS).
+
+Instructions
+
+1. Run main.m in matlab (does not require X11).
+2. Find results printed to stdout
+3. Find final figure written to p-values_CWAS.jpg
+4. Find sample outputs in example_out/
+
+Please refer to the attached report for mathematical details.
+
+
+***Special Note on replicating Shehzad 2014 results:
+This is a personal account of how I tried to replicate the results as
+published by Shezad et al. and failed.
+ 
+I first tried to get a hold of the dataset they used, which I found
+was called the ADHD-200 dataset. There seemed to be a sizable
+community working on this set because I had to make an account with
+them in order to have access to the data and I was pleasantly
+bombarded with issues they were having in my email.
+
+After waiting for around a week, they finally approved my access and I
+was able to get the data. First, I found that the data by itself was
+unusable because there were multiple updates and fixes and it took me
+a lot of work just to get the data to be usable.
+
+Next, I followed the paper's instructions and installed C-PAC using
+their installation script for Ubuntu on my Ubuntu machine. Little did
+I know, the installation took around 2 hours just to complete and
+required downloading about 6 GB of data just to run.
+
+Despite the setbacks, I was still optimistic about the program working
+because I used their Ubuntu-specific script in the exact same software
+environment that it was written for. I was wrong. 
+
+After digging through their massive documentation and tweaking over 20
+required parameters, I was still not able to get any functional result.
+I decided it would be best for me to generate this data theoretically
+and eventually gave up trying to run their code. 
