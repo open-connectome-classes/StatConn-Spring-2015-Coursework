@@ -2,6 +2,6 @@
 
 The original project was created in IPython, and an HTML readout of the notebook is located at
 
-itsthefedora.github.io/jhu/statconn/hw1
+http://itsthefedora.github.io/jhu/statconn/hw1
 
 The .PY should run the code bits to make figures.
