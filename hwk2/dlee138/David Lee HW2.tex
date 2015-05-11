@@ -1,0 +1,58 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+
+\title{Statistical Connectomics HW 2}
+\author{David Lee}
+\date{February 17, 2015}
+
+\begin{document}
+\maketitle
+
+A statistical decision problem we discussed in class can be divided into 6 parts - the sample space, the model, action space, decision rule class, loss function and risk function.
+
+\begin{description}
+\item[Sample space]
+The sample space consists all possible arrangements of edges, nodes, and labels.
+\begin{equation}
+G_n=(V,E,Y)
+\end{equation}
+
+\item[Model]
+A stochastic block model consisting of 
+\begin{equation}
+P=SBM_n^k(\rho,\beta)\textrm{ where }\rho\in\Delta_2\textrm{ and }\beta\in(0,1)^{2\times2}
+\end{equation}
+\begin{equation*}
+\textrm{ when } k =2
+\end{equation*}
+
+\item[Action space]
+The action space is the assignment given by the clustering algorithm.
+\begin{equation}
+A=\{y\in\{0,1\}^n\}
+\end{equation}
+
+\item[Decision rule class]
+The decision rule class is given by a method of clustering (such as k-means in our case discussed in class)
+
+\item[Loss function]
+The loss function can be given by the adjusted rand index and gives the cost associated with an action
+\begin{equation}
+l:G_n\times A\to R_+
+\end{equation}
+
+\begin{equation*}
+l=\sum_{i=1}^n\Theta(\hat{y}_i=y_i)
+\end{equation*}
+
+\item[Risk function]
+The risk function is given by the following equation
+\begin{equation}
+R=P\times l
+\end{equation}which can be redefined as the expected value of the loss function:
+\begin{equation}
+	R=E\{l\}
+\end{equation}
+\end{description}
+\end{document}	
