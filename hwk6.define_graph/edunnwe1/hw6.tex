@@ -1,0 +1,49 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\geometry{letterpaper}                  
+\usepackage{graphicx}
+\usepackage[hyphens]{url}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{fixltx2e}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{url}
+\usepackage[normalem]{ulem}
+\usepackage[pdftex]{color}
+\usepackage{varioref}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\labelformat{equation}{\textup{(#1)}}
+\usepackage[sort&compress,colon,square,numbers]{natbib}
+
+
+\usepackage{color}
+\newcommand{\todo}[1]{{\color{red}{\it TODO: #1}}}
+\newcommand{\jovo}[1]{{\color{green}{\it jovo: #1}}}
+\newcommand{\will}[1]{{\color{blue}{\it will: #1}}}
+\newcommand{\greg}[1]{{\color{cyan}{\it greg: #1}}}
+
+
+\begin{document}
+
+\begin{center}\Large \bf EN.580.694: Statistical Connectomics \\ Hw 6 - Defining a Graph \end{center}
+\begin{center} Erika Dunn-Weiss $\cdot$  \today \end{center}
+\bigskip
+
+\section*{Redefining the graph in the Fino 2011 paper} 
+
+In class, we wanted to know: if $p$ has an edge with $q$ and $p'$ has an edge with $q$, do $p$ and $p'$ share an edge? Since this is a relationship between three vertices, it was reminiscent of the Bock problem. There, we wanted to know: given the properties of $p$ and $p'$, how likely is it that both will have an edge with $q$? 
+
+I think there is an important difference between these questions that makes it possible to redefine the graph in the Bock case but not in the Fino case. My intuition was that this involves the fact that we are concerned with creating a cycle in the Fino case, which wouldn't lend itself to a dimensionality reduction. 
+
+Talking to Elan on github (issue 212) helped me rigorously clarify why this is the case. In the Bock case, we redefine the set of nodes and what constitutes an edge to include the original node and their dependencies (or Markov blanket). This can be done because the edge successfully includes the dependencies of both $p$ and $p'$ (i.e. information about $q$). But, to redefine cycles of length $k$, we would still need to represent in the graph the original vertex and and all of the $k$th order neighbors, meaning that we cannot reduce/redefine the graph vertices to $p$ and $p'$ and still answer our question about cycles. To do so would be to lose fundamental information about the graph.
+
+
+
+
+
+
+\end{document}  
