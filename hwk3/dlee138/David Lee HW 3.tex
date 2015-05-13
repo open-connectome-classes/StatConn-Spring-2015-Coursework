@@ -1,0 +1,23 @@
+\documentclass[12pt]{article}
+\usepackage[left=1in,right=1in,top=0.7in, bottom=0in]{geometry}
+\geometry{letterpaper}     
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+
+\title{Statistical Connectomics HW 3}
+\author{David Lee}
+\date{February 24, 2015}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+In the Bock paper, the sample space was defined as $\mathscr{G} _n= (\mathscr{X}, \mathscr{Y}, \mathscr{Z})$ where $\mathscr{X}=(0,1)^{n\times n}$ is the set of nodes (i.e. neurons) in the graph, $\mathscr{Y}=(0,1)^{n}$ determines whether the neuron is excitatory or inhibitory and  $\mathscr{Z}$ describes the preferred orientation of the neuron.  The tuning property of the neuron can range from 0 to 2$\pi$, which would give us  $\mathscr{Z} =(0, 2\pi)^{n}$.  However, since the neurons must be categorized in to discrete blocks, the Bock paper defined $\mathscr{Z}$ by partitioning it into 8 blocks, which gives us $\mathscr{Z}=[8]^{n}$.  In this assignment, we will try to redefine this definition of  $\mathscr{Z}$ to (hopefully!) come up with a better model and also define the structure of the block model parameters, $\rho$ and $\beta$, used in this model
+
+\section{Redefining  $\mathscr{Z}$}
+Rather than defining $\mathscr{Z}$ into 8 partitions, we decided to use 18 partitions instead for two reasions. 1) The range of orientation sensitivity for a neuron is around 10 degrees, so this may be a more biologically accurate representation of neurons in the brain and 2) More blocks allow a more detailed categorization of neurons and could prevent oversimplifying our model.
+
+\section{Structure of Block Model Parameters $\rho$ and $\beta$}
+For $\rho$ and $\beta$ we will use the following definitions we learned from class: $\rho: \mathscr{Z} \in \Delta_{k}$ and $\beta = (0,1)^{k \times k}$.  Now we just have to define k.  We propose to define k=18, since there will be 18 blocks in our model due to how we partitioned $\mathscr{Z}$ in the previous section above.  Therefore,  $\rho: \mathscr{Z} \in \Delta_{18}$.
+\end{document}	
