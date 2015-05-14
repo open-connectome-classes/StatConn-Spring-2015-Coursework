@@ -14,14 +14,20 @@ graph3=importdata('Time3.mat');
 figure(1);
 imagesc(graph);
 colormap(gray);
+title('Figure 1: Graph at Time=1');
+
 
 figure(2);
 imagesc(graph2);
 colormap(gray);
+title('Figure 2: Graph at Time=2');
+
 
 figure(3);
 imagesc(graph3);
 colormap(gray);
+title('Figure 3: Graph at Time=3');
+
 
 % Algorithm with 1 cluster
 [likelihood_1,val_1] = fmincon(@(p) -sum(sum(graph*log(p)+(1-graph)*log(1-p))),0.01,[],[],[],[],0,1);
@@ -58,12 +64,12 @@ clust3_33 = graph(graph_3==3,graph_3==3);
 block3_t1(i)=val_3;
 end
 val_3=mean(block3_t1);
-% Figure 2
+% Figure 4
 figure(4)
 plot(1:3,-[val_1 val_2 val_3]);
 xlabel('# of Clusters');
 ylabel('Log Likelihood');
-title('Figure 2: Log Likelihood vs. # of Clusters');
+title('Figure 4: Log Likelihood vs. # of Clusters at Time=1');
 
 % Algorithm with 1 cluster
 [likelihood_1,val_1] = fmincon(@(p) -sum(sum(graph2*log(p)+(1-graph2)*log(1-p))),0.01,[],[],[],[],0,1)
@@ -99,12 +105,12 @@ clust3_33 = graph2(graph2_3==3,graph2_3==3);
  block3_t2(i)=val_3;
 end
 val_3=mean(block3_t2);
-% Figure 2
+% Figure 5
 figure(5)
 plot(1:3,-[val_1 val_2 val_3]);
 xlabel('# of Clusters');
 ylabel('Log Likelihood');
-title('Figure 2: Log Likelihood vs. # of Clusters');
+title('Figure 2: Log Likelihood vs. # of Clusters at Time=2');
 
 % Algorithm with 1 cluster
 block1_t3=1:10;
@@ -150,7 +156,7 @@ figure(6)
 plot(1:3,-[val_1 val_2 val_3]);
 xlabel('# of Clusters');
 ylabel('Log Likelihood');
-title('Figure 3: Log Likelihood vs. # of Clusters');
+title('Figure 6: Log Likelihood vs. # of Clusters at Time=6');
 
 predicted_blocks_t1=1;
 lik_t1=[-mean(block1_t1),-mean(block2_t1),-mean(block3_t1)]
@@ -182,4 +188,7 @@ predicted_blocks_t3
 figure(7)
 predictions=[predicted_blocks_t1,predicted_blocks_t2,predicted_blocks_t3]
 bar(predictions)
+title('Predicted number of blocks at each time point');
+ylabel('Number of Predicted Blocks');
+xlabel('Time point');
  
