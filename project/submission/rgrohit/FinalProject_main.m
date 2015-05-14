@@ -19,7 +19,7 @@ end
 if ~exist('found', 'var')
     addr = ' https://www.dropbox.com/sh/idt3d0gylplyo31/AAAVUFyK3h6ZvSUTcQlLPyRaa/rohitg_statconn.zip';
     opts = ' --no-check-certificate';
-    cmd = strcat('wget',addr, opts);
+    cmd = strcat('wget',' -O rohitg_statconn.zip',addr, opts);
     system(cmd, '-echo');
 end
 
