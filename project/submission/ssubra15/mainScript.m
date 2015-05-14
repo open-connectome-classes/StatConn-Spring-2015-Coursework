@@ -37,26 +37,49 @@ for i = 1:length(event_labels)
     
 end
 
-%Plot difference: p(edge|RR) - p(edge|not RR)
 diff_params = SBM_params(1,:) - SBM_params(2,:);
-separation_thresh = -0.01;
 
+%Plot difference: p(edge|RR) - p(edge|not RR)
 figure;
 gscatter(1:length(SBM_params),diff_params,event_labels);
 hold on;
-refline(0,separation_thresh) %Threshold of separation
-hold off;
-colormap winter
 legend('Failures','Successes')
 xlabel('Seizure Number')
 ylabel('P(Edge|RR) - P(Edge|Not RR)')
 title('Difference in SBM Probabilities for Each Seizure')
 
-%Compute accuracy
-check = diff_params < separation_thresh;
-SBM_accuracy = sum(check' == event_labels)/length(check)
+%% Leave one out CV
+%Each time compute the threshold that works best
 
-%% Run permutation test and check accuracy
+predictions = zeros(size(event_labels));
+for n = 1:length(event_labels)
+    %Leave out the nth entry in both diff_params and event_labels
+    train_set = diff_params(setdiff(1:length(event_labels),n));
+    train_labels = event_labels(setdiff(1:length(event_labels),n));
+    
+    %Compute the best threshold between -1 and 1
+    best_t = -1;
+    best_acc = 0;
+    for t = -1:0.01:1
+        check = train_set < t;
+        acc = sum(check' == train_labels)/length(train_labels);
+        if acc > best_acc
+            %If better accuracy, save the threshold
+            best_t = t;
+            best_acc = acc;
+        end
+    end
+       
+    %Predict the last outcome
+    predictions(n) = (diff_params(n) < best_t);
+end
+
+%% Compute results: accuracy
+
+%Compute accuracy
+SBM_accuracy = sum(predictions == event_labels)/length(event_labels)
+
+%% Run random assignment test and check accuracy
 
 %For 10000 iterations - randomly assign 14 successes and 25 failures and
 %check the accuracy
