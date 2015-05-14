@@ -3,7 +3,9 @@ url='https://www.dropbox.com/sh/idt3d0gylplyo31/AADtmR1GhccrhCG7RY6C1O5Qa/mchyn1
 cmd=['wget ' url ' -O "mchyn1_aceeccc.zip" --no-check-certificate'];
 system(cmd, '-echo');
 unzip('mchyn1_aceeccc.zip');
-addpath('mchyn1_aceeccc');
+A=load('A.mat');
+info=load('info.mat');
+%addpath('mchyn1_aceeccc');
 
 %not caring about the pairs of age/gender, sorting by phenotype
 in1 = 1;
@@ -11,25 +13,24 @@ in2 = 1;
 adhd=nan(20,1);
 tdc=nan(20,1);
 for i = 1:40
-    if info(i,3) == 1
-        adhd(in1)=info(i,4);
+    if info.info(i,3) == 1
+        adhd(in1)=info.info(i,4);
         in1=in1+1;
     else
-        tdc(in2)=info(i,4);
+        tdc(in2)=info.info(i,4);
         in2=in2+1;
     end
-    
 end
 %ADHD
 A1=cell(20,1);
 for i = 1:20
-    A1{i}=A{adhd(i)};
+    A1{i}=A.A{adhd(i)};
 end
 A1 = A1(~cellfun(@isempty, A1));
 
 A2=cell(20,1);
 for i =1:20
-    A2{i}=A{tdc(i)};
+    A2{i}=A.A{tdc(i)};
 end
 A2=A2(~cellfun(@isempty,A2));
 
