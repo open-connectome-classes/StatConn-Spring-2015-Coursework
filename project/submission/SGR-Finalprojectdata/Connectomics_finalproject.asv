@@ -1,0 +1,97 @@
+%Final Project - Class: Statistical Connectomics
+%Author: Sandra Gomez R., May 2015
+%Project: Comparison of SBM and biSBM for the infered C. elegans glia network 
+
+%% Should be submitted along with other files:
+
+%Celegans_data.xlsx - the excel file with the data
+%adjlist2matrix.m  - .m file 
+%.m files created by the Christopher Aicher group:
+   %wsbm.m - wrapper function for the weighted SBM
+   %main_alg.m - infers the data structure and feeds it to wsbm_driver
+   %wsbm_driver.m - outputs the best sbm for the data
+   %biwsbm.m - runs wsbm.m for bipartite networks 
+
+% Names of matrices used %
+   %GN - Glia-Neuron adj list
+   %NN - Neuron-Neuron adj list
+   %GG = Glia-Glia adj list
+
+%% -------------------------------CODE----------------------------------- %%
+
+%Load files - Celegans Xcel file
+filename='Celegans_data.xlsx';
+GN=xlsread(filename,2,'D4:E118'); 
+NN=xlsread(filename,1,'G2:H6419');
+GN_w=xlsread(filename,2,'D4:F118');
+NN_w=xlsread(filename,1,'G2:I6419');%"weighted" versions; I'm cheating, the weighhts are all one
+types=xlsread(filename,5,'C1:C333');%these are the labels of the nodes; they're used in biSBM
+
+%Download files? << STILL NOT WORKING ugh
+%{
+addr = 'http://sandragomez21.weebly.com/zip-files.html';
+    opts = ' --no-check-certificate';
+    system('C:\cygwin\bin\bash --login -c "addr"');
+%}
+
+%Obtain and visualize full matrices
+GN_full=adjlist2matrix(GN); 
+NN_full=adjlist2matrix(NN);
+figure (1); imagesc(NN_full+NN_full'); colorbar %Worm Neuron Connectome
+
+%Infer Glia-Glia adj list 
+
+T=unique(GN(:,2)); %unique neurons
+n=size(GN,1);
+GG=zeros(1,2);%lame preallocation
+for i=1:n
+    [~,locNN]=ismember(GN(i,2),NN(:,1));%get the position in NN of the match
+    [~,loct]=ismember(NN(locNN,1),T(:,1));
+    a=NN(NN(:,1)==T(loct,1),2);%neurons connected to T(loct,1)
+    b=GN(T(loct,1)==GN(:,2),1);%glia connected to T(loct,1)
+    l=size(a,1);
+    store=zeros(1,1);
+    for k=1:l
+        
+        t=GN(a(k)==GN(:,2),1);%glia connected to a(k)
+        if isempty(t)
+            t=[];
+        else
+            store=[store;t];
+        end
+        glia=[b;store]; %these are all the glia that touch T(loct,1) in some way
+        glia(glia==0)=[];%get rid of those nasty zeroes
+        glia=unique(glia); %avoid repetition
+        lil_gg=combnk(glia,2); %it's a tiny glia-glia adj list
+    end
+    GG=[GG;lil_gg];
+end
+GG(1,:)=[];%bye zeroes
+
+%GG_full = %Glia-glia adjmatrix
+GG_full=adjlist2matrix(GG);
+figure (2); imagesc(GG_full+GG_full'); colorbar %Worm Glia Connectome?
+%GG =  %Glia-glia adjlist
+GG_full_w=[GG_full,ones(size(GG_full,1),1)]; %third column is only ones...yeah, I'm cheating
+
+%Run SBM for NN, GG and GN separately
+
+    LabelsNN = wsbm(NN,i);
+    LabelsGG = wsbm(GG,i);
+    LabelsGN = wsbm(GN,i);
+
+%Run bipartite SBM for GN_w
+
+C=unique(types); display(C);%report the two main labels 
+a=1; b=1; %these are the two k for the SBM..
+[Labels, Model]=biwsbm(GN_w,a,b,types);
+
+%plot the Prob matrix
+model=Model.Para.mu; %use only numeric part of statistical model
+figure (3); imagesc(model'); %Probability matrix
+title('Probability of a vertex belonging to a group');
+xlabel('Probability of belonging to group'); ylabel('Vertex');
+colorbar
+
+
+
