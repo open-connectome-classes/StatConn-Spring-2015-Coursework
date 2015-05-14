@@ -1,0 +1,106 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\geometry{letterpaper}                  
+\usepackage{graphicx}
+\usepackage[hyphens]{url}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{fixltx2e}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{url}
+\usepackage[normalem]{ulem}
+\usepackage[pdftex]{color}
+\usepackage{varioref}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\labelformat{equation}{\textup{(#1)}}
+\usepackage[sort&compress,colon,square,numbers]{natbib}
+
+
+\usepackage{color}
+\newcommand{\todo}[1]{{\color{red}{\it TODO: #1}}}
+\newcommand{\jovo}[1]{{\color{green}{\it jovo: #1}}}
+\newcommand{\will}[1]{{\color{blue}{\it will: #1}}}
+\newcommand{\greg}[1]{{\color{cyan}{\it greg: #1}}}
+
+
+\begin{document}
+
+\begin{center}\Large \bf EN.580.694: Statistical Connectomics \\ Final Project Proposal \end{center}
+\begin{center} akim1 $\cdot$  \today \end{center}
+\bigskip
+
+\section*{Effects of Spatial Resolution on Accurate Determination of Graph Connectivitiy}
+
+\paragraph{Opportunity}
+The ability to measure individual connectomes holds great promise in advancing
+our knowledge of the brain and consciousness. Despite these promises, current
+technology and state of knowledge prevents us from rescaling this measurement
+process into a computational problem that can be solved within a reasonable
+time with finite resources. The complexity of the problem inevitably poses a
+challenge both in validation of data and establishment of a consensus dataset.
+This proposal posits that one factor that may contribute to these challenges is
+the spatial resolution at which the data is obtained.
+
+\paragraph{Challenge}
+There are no obvious technological or experimental challenges that have
+prevented a study of the form proposed here from being pursued in the past.
+
+\paragraph{Action}
+In this study, a true neuron connectivity network will be generated using a
+stochastic block model. The neurons will be assumed to be in a 2-dimensional
+grid where each pixel will represent a neuron. In one limiting case, contiguous
+pixels will be assigned one block, while in another limiting case, each pixel
+will be assigned randomly to a block. These limiting cases will represent the
+extremes of what would assumed to be observed physiologically. The former case
+represents the homogeneous case where all neighboring neurons belong to the same
+block while the latter represents the heterogeneous case where no two
+neighboring neurons belong to the same block. Once the true network is
+generated, the network will be coarsened by combining the connectivity of
+neighboring neurons to form one aggregate neuron. Analysis will be performed on
+this coarsened data to determine the parameters of the model and their
+deviations from the true value.
+
+\paragraph{Resolution}
+It is predicted that the homogeneous case will experience minimal detriment from
+coarsening while the heterogeneous case will experience significant detriment.
+Since physiological conditions fall somewhere between these two limting cases,
+it is expected that deviations from the true connectome will depend both on the
+spatial resolution of the measurement and the brain region of interest.
+
+\paragraph{Future Work}
+Future work will include further development of the model onto a 3-dimensional
+grid which would be more experimentally and clinically relevant.
+
+\pagebreak
+\subsection*{Statistical Decision Theoretic}
+\begin{description}
+\item[Sample Space]
+$\mathscr{G} = (V,E,B)^{N\times N}$ where $V$ is the
+presence of a vertex, $E$ is the presence of an edge, and $B$ is the block to
+which it belongs.
+
+\item[Model] 
+The model is given by the stochastic block model:\\
+$\{\text{SBM}_N^k(\rho,\beta): \rho \in\Delta_k
+\text{, }\beta\in(0,1)^{k\times k}\}$
+
+\item[Action]
+Action space will consist of the possible parameters of the stochastic block
+model.
+
+\item[Decision Rule Class]
+k-means clustering will be used to identify the identity of a neuron to a
+particular block.
+
+\item[Loss Function]
+Likelihood or sum of squares will be used as loss function.
+
+\item[Risk]
+The risk will be defined as the expectation of the loss.
+\end{description}
+\end{document}  
+
