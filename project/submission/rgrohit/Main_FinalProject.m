@@ -3,7 +3,7 @@ clc; clear all; close all;
 %%
 %load data
 
-%Get code from dropbox(borrowed from gregs code/project tempalte)
+%Get code from folder or dropbox(borrowed from gregs code/project tempalte)
 fname = 'rohitg_statconn.zip';
 files = dir();
 
