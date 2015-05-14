@@ -14,12 +14,19 @@ You will need the following libraries (my version in parentheses). I recommend u
 
 - Python 3 (3.4.3)
 - NumPy (1.9.2)
+
 	pip install numpy
+
 - SciPy ( ... )
+
 	pip install scipy
+
 - Matplotlib ( ... )
+
 	pip install matplotlib
+
 - Scikit Learn ( ... )
+
 	pip install sklearn
 
 ## Running
