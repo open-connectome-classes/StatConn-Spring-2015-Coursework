@@ -117,6 +117,12 @@ last_value = [0]
 truth_memoize_under_function = {}
 def minimize(x, m):
     '''function to minimize the metric m on the RDPGMM graph with alphas=x.'''
+
+    for i in x:
+        if i < 0:
+            return 100000
+        if i > 3.0:
+            return 100000
     if not m in truth_memoize_under_function:
         #truth_memoize_under_function[m] = m(graph_truth)
         truth_memoize_under_function[m] = m(graph_truth)#\
