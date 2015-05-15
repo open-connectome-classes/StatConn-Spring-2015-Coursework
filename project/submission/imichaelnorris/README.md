@@ -11,7 +11,9 @@ Please cd into the code directory before running.
 
 Everything is written in Python 2.
 
-$ python project.py
+Note that the figure will disappear if you don't use the "-i" flag with Python
+
+$ python -i project.py
 
 This will run the project, download data, and run parameter optimization to try
 to fit a Random Dot Product Graph model to the C. Elegans connectome.
