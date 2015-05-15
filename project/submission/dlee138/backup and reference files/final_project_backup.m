@@ -1,15 +1,19 @@
-%
 clear all;
-%import data
-url='https://www.dropbox.com/sh/idt3d0gylplyo31/AACqNPXHHbxKfYXuYXJ7un96a/dlee138new.zip?dl=0';
-cmd=['wget ' url ' -O "dlee_138new.zip" --no-check-certificate'];
-system(cmd);
-unzip('dlee_138new.zip');
-addpath('dlee_138new');
-
 graph=importdata('Time1.mat');
 graph2=importdata('Time2.mat');
 graph3=importdata('Time3.mat');
+
+figure(1)
+imagesc(graph);
+colormap(gray);
+
+figure(2)
+imagesc(graph2);
+colormap(gray);
+
+figure(3)
+imagesc(graph3);
+colormap(gray);
 
 figure(1);
 imagesc(graph);
@@ -191,3 +195,4 @@ bar(predictions)
 title('Predicted number of blocks at each time point');
 ylabel('Number of Predicted Blocks');
 xlabel('Time point');
+ 
