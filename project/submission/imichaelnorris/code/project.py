@@ -57,7 +57,8 @@ def block_degree_mean_and_stdev(graph):
             for node in blocks[block]:
                 temp_block.append(sum(graph.adj[i]))
 
-            x.append( (np.mean(temp_block), np.std(temp_block)))
+            #x.append( (np.mean(temp_block), np.std(temp_block)))
+            x.append(np.mean(temp_block))
             i += block_size
         return x
     else:
@@ -72,7 +73,7 @@ amount of connections.'''
         i = 0
         for block_size in block_sizes:
             temp_block = []
-            x.append(sum(sum(graph.adj[i:i+block_size,:])))
+            x.append(sum(sum(graph.adj[i:i+block_size,:]))/block_size)
 
             i += block_size
         return x
@@ -102,7 +103,8 @@ def node_degree(graph):
 #1.13, 1.40
 
 #variable
-alphas = [1.0]*len(block_sizes)
+#alphas = [1.25]*len(block_sizes)
+alphas = [1.25, 1.25, 1.25, 1.5, 0.8,  1.25, 1.25, 1.25]
 shape = (sum(block_sizes), sum(block_sizes))
 
 metric = clustering_coefficient
@@ -138,7 +140,7 @@ def minimize(x, m):
     #number of nodes in each block
     #block_degs = block_degrees(the_graph)
     block_degs = block_degree_mean_and_stdev(the_graph)
-    block_degs = [mean for mean, std in block_degs]
+    #block_degs = [mean for mean, std in block_degs]
 
     #make sure that each block's total number of edge degrees are within one
     #standard deviation of the mean of the original graph.
