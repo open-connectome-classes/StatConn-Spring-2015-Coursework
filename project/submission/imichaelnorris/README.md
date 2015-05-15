@@ -16,7 +16,7 @@ $ python project.py
 This will run the project, download data, and run parameter optimization to try
 to fit a Random Dot Product Graph model to the C. Elegans connectome.
 
-Required libraries
+Required Python libraries
 ==================
 
 networkx
