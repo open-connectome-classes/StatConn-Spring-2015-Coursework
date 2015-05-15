@@ -2,13 +2,19 @@ quick readme
 
 code is in the code directory
 
+downloading will use Python's urlib2 module and put the data into the code/data
+directory.
+
 Running
 ========
-$ python project.py
-
-This will run 
+Please cd into the code directory before running.
 
 Everything is written in Python 2.
+
+$ python project.py
+
+This will run the project, download data, and run parameter optimization to try
+to fit a Random Dot Product Graph model to the C. Elegans connectome.
 
 Required libraries
 ==================
@@ -21,6 +27,11 @@ numpy
 matplotlib
 pylab (I think this is included in scipy
 
-For parsing Excel data from the worm atlas (Not necessary, but I included my 
-parsing script anyway...)
+For parsing Excel data from the worm atlas (Not necessary -- you will be using
+the derived file that I created from this -- but I included my parsing script 
+anyway...)
 xlrd
+
+Code
+=======
+
