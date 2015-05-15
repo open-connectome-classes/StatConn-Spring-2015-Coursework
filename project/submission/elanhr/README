@@ -1,0 +1,9 @@
+Extending FAQ Matching to use Anti-Seed Information
+Elan Hourticolon-Retzler
+elanhr@jhu.edu
+
+AntiSeed.m - This function returns an index of vertcices in A corresponding to vertices in B given two Adjacency matricies, A and B, as well as a number of anti-seeds, m. The correct P matrix should be all 0 for the first mxm block.
+ConVogHard_rQAP.m	 - same usuage as above but using seeds.  The correct P matrix should be all an identity matrix for the first mxm block.
+download_data.m	- This script downloads test real world test data that can be used for AntiSeed/ConVogHard_rQAP (at the moment since the antiseed method is demonstratably unreliable I am sticking to simulated data)
+lapjv.m	- helper file for AntiSeed.m and ConVogHard_rQAP.m
+simulated_data.m - Generatetes random graphs pairs and tests the accuraccy of using seeds/antiseeds
