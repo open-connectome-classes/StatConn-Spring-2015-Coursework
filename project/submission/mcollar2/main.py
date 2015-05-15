@@ -43,6 +43,8 @@ print( "    Worm+BA : n runs from 0 to 250, increments of 10; each has progress 
 print()
 sys.stdout.flush()
 
+fig = plt.figure()
+
 ## == SBM
 
 print( 'SBM', end=': ' )
@@ -96,6 +98,7 @@ for curNIdx in arange( nn ):
     #print()
 
 print('Done!')
+print()
 sys.stdout.flush()
 
 # -- Plot
@@ -123,6 +126,8 @@ cb.set_label('Fraction of trials')
 fn = 'Figures/sbm-perf-{0}.pdf'.format( random.randint(0, high=1000) )
 plt.savefig( fn )
 plt.show()
+
+fig.clf()
 
 #==============================================================================#
 
@@ -177,6 +182,7 @@ for curNIdx in arange( nnBA ):
     #print()
 
 print('Done!')
+print()
 sys.stdout.flush()
 
 # -- Plotting
@@ -200,6 +206,8 @@ cb.set_label('Fraction of trials')
 fn = 'Figures/ba-perf-{0}.pdf'.format( random.randint(0, high=1000) )
 plt.savefig( fn )
 plt.show()
+
+fig.clf()
 
 #==============================================================================#
 
@@ -225,9 +233,9 @@ Aworm = scdata.sc_graphml_adj( graphRoot, symmetrize = True )
 
 k = 4
 
-nsWorm = arange( 0, 201, 20 )
+nsWorm = arange( 0, 251, 10 )
 nnWorm = nsWorm.shape[0]
-nItersWorm = 50
+nItersWorm = 100
 
 nConns = 3
 
@@ -294,6 +302,8 @@ cb.set_label('Fraction of trials')
 fn = 'Figures/wormba-perf-{0}.pdf'.format( random.randint(0, high=1000) )
 plt.savefig( fn )
 plt.show()
+
+fig.clf()
 
 
 print()
