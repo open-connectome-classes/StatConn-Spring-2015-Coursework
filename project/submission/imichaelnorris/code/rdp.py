@@ -1,4 +1,5 @@
 '''
+Michael Norris
 Random Dot Product Graph Model
 '''
 import numpy as np
