@@ -26,6 +26,7 @@ scipy.stats
 numpy
 matplotlib
 pylab (I think this is included in scipy
+cma for CMA-ES optimizer
 
 For parsing Excel data from the worm atlas (Not necessary -- you will be using
 the derived file that I created from this -- but I included my parsing script 
