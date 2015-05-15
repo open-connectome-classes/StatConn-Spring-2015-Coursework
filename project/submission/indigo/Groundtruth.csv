@@ -1,0 +1,50 @@
+Region Name,Region number,Cluster (12),Cluster (4)
+ACAd,1,4,3
+ACAv,2,4,3
+AId,3,2,2
+AIp,4,2,2
+AIv,5,2,2
+AUDd,6,6,3
+AUDp,7,6,3
+AUDv,8,6,3
+CLA,9,10,4
+ECT,10,7,2
+ENTl,11,10,4
+ENTm,12,12,
+GU,13,2,2
+ILA,14,4,3
+MOp-ll & tr,15,11,1
+MOp-oro,16,1,1
+MOp-ul,17,8,1
+MOp-w,18,9,1
+MOs-c,19,11,1
+MOs-fef,20,4,3
+MOs-rd,21,8,1
+MOs-rdl,22,1,1
+MOs-rdm,23,11,1
+ORBl,24,4,3
+ORBm,25,4,3
+ORBvl,26,4,3
+PERI,27,7,2
+PIR,28,3,2
+PL,29,4,3
+PTLp,30,4,3
+RSPagl,31,4,3
+RSPd,32,4,3
+RSPv,33,4,3
+SUBd,34,12,
+SSp-bfd.al,35,1,1
+SSp-bfd.w,36,9,1
+SSp-ll & tr,37,11,1
+SSp-m & n,38,1,1
+SSp-ul,39,8,1
+SSs-c & cd,40,8,1
+SSs-r & cv,41,1,1
+TEa,42,7,2
+TTd,43,3,2
+VISal,44,5,3
+VISam,45,5,3
+VISC,46,2,2
+VISl,47,5,3
+VISp,48,5,3
+VISpm,49,5,3
