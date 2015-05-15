@@ -74,7 +74,8 @@ We use the node-block clustering from Figure 2 of \cite{pavlovic}, and generate
 Random Dot Product Graphs with these blocks.
 
 We applied parameter estimation to the alpha parameters for each block, using a
-conjugate gradient method to attempt to converge to a solution.
+Covariance Matrix Adaption Evolutionary Strategy optimizer to converge to a 
+solution.
 
 The graph metric that we are using in optimization is the clustering 
 coefficient, which is defined \cite{pavlovic} as the amount of triplets of nodes
@@ -119,7 +120,6 @@ I also wrote code to do spectral embedding but did not get to play around with
 that for clustering purposes.  It would be interesting to see spectral
 embedding for the different blocks in this model, as I've only seen theory
 related to spectral embedding for a single RDP graph.
-
 \newpage
 
 \bibliography{main.bib}
