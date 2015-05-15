@@ -10,24 +10,13 @@ This is Max C.'s StatConn final project. When executed, it will generate three f
 
 ## Dependencies
 
-You will need the following libraries (my version in parentheses). I recommend using pip (you will need a C++ compiler), and I've included the appropriate commands.
+You will need the following standard numerical Python stack (my version in parentheses):
 
-- Python 3 (3.4.3)
-- NumPy (1.9.2)
-
-	pip install numpy
-
-- SciPy ( ... )
-
-	pip install scipy
-
-- Matplotlib ( ... )
-
-	pip install matplotlib
-
-- Scikit Learn ( ... )
-
-	pip install sklearn
+- Python 3     ( 3.4.1 )
+- NumPy        ( 1.9.2 )
+- SciPy        ( 0.14.1 )
+- matplotlib   ( 1.4.3 )
+- scikit-learn ( 0.15.2 )
 
 ## Running
 
@@ -35,4 +24,6 @@ To run, simply execute
 
 	python main.py
 
-(or python3 if you have multiple installations). The relevant figures will appear in the Figures directory. (The random numbers at the end of the figure names ensure that no iinteresting old results get overwritten accidentally.)
+(or python3 if you have multiple installations). The relevant figures will appear in the Figures directory. (The random numbers at the end of the figure names ensure that no interesting old results get overwritten accidentally.)
+
+This will take *a while*, so please be patient. :)
