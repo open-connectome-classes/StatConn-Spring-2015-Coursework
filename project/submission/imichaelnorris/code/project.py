@@ -13,6 +13,7 @@ import networkx
 import scipy.optimize
 import numpy as np
 from display_adj_matrix import draw_adj
+import cma
 
 block_sizes = [len(blocks[block]) for block in sorted(blocks)]
 #block_sizes = [4,4,4,4]
@@ -173,7 +174,8 @@ def minimize(x, m):
 
 min_cc = lambda x: minimize(x, metric)
 
-optimize_function = scipy.optimize.fmin_cg
+#optimize_function = scipy.optimize.fmin_cg
+optimize_function = cma.CMAEvolutionStrategy(alphas, 0.05)
 
 #best
 '''
@@ -196,12 +198,13 @@ truth metric value {<function truth_degree_mean_and_stdev at 0x3bea6e0>:
 #0.98334403   1.00087729   0.95337238
 #optimize_function = scipy.optimize.fmin_powell
 
-result = optimize_function(min_cc, alphas, epsilon=0.05, maxiter=3)
+#result = optimize_function(min_cc, alphas, epsilon=0.05, maxiter=3)
+result = optimize_function.optimize(min_cc, iterations=3)
 print 'done, best match', result
 print 'truth metric value', truth_memoize_under_function
 print 'RDP graph metric value', last_value[0]
 
-best_match = RDPGMM(shape, result, block_sizes)
+best_match = RDPGMM(shape, result[0], block_sizes)
 
 draw_adj(best_match)
 
