@@ -1,10 +1,32 @@
-%% Generating Graphs (Adjacency Matrix)
+%% Import Data
 
 clear
 close all
-pause(0.1);
 
-load('pp.mat');
+%have I downloaded my zip file
+fname = 'dx_statconn.zip';
+files = dir();
+
+for i=1:length(files) %silly but your directory should be almost empty
+    if strcmp(fname, files(i).name)
+        found = 1;
+        break;
+    end
+end
+
+%if no, download it
+if ~exist('found', 'var')
+    %craft and run command
+    addr = ' https://www.dropbox.com/sh/idt3d0gylplyo31/AADwB7_QznoAKw9wFagFRW9Pa/dx_statconn.zip?dl=1';
+    opts = ' --no-check-certificate';
+    cmd = strcat('wget', addr, opts);
+    system(cmd, '-echo');
+end
+
+%regardless, unzip it
+unzip(fname);
+
+
 
 graphNum = length(pp.btypeInd);
 bTypeNames = { 'Hit', 'Miss', 'False Alarm', 'Correct Rejection'};
