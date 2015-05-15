@@ -12,7 +12,7 @@
 \usepackage{algorithmic}
 \usepackage{url}
 \usepackage[normalem]{ulem}
-\usepackage[pdftex]{color}
+%\usepackage[pdftex]{color}
 \usepackage{varioref}
 \usepackage{mathrsfs}
 \usepackage{amsmath}
@@ -34,7 +34,7 @@
 \bigskip
 
 
-\subsection*{Title}
+\subsection*{Using a Random Dot Product Model to Approximate the C. Elegans Connectome}
 $\\ \\$
 \centerline{\includegraphics[scale=0.5]{adjacencymatrix.png}}
 \newpage
@@ -51,31 +51,41 @@ connectomics work.
 \paragraph{Challenge}
 
 \paragraph{Action}
-The Random Dot Product Graph Model (RDPG) represents
+The Random Dot Product Graph Model (RDPG) represents each node by a random
+vector, and assigns the probability of edges between nodes to be the dot product
+between the two vectors \cite{young}.  
+
+Here, we use a variant of RDPG, the Random Dot
+Product Mixture Model, where we assign 
+
+We use the block classifications from Figure 2 of \cite{pavlovic}, and generate
+Random Dot Product Graphs with these blocks.
+
 \paragraph{Resolution}
-Shown above is the TRT result for each atlas using graphs from the KKI2009 dataset. We can see here that with the provided graphs, the Desikan and Harvard-Oxford atlases correctly match $41$ of $42$ scans and have $70$ and $48$ regions, respectively. The Juelich and Talairach atlases both correctly matched all subjects and have $121$ and $1106$ regions, respectively. It can also be seen that the Talairach atlas has much higher discrimination across subjects than the other three atlases, as indicated by the larger dynamic range of image intensities. This suggests that parcelation schemes with too few regions may discard useful information about the brain graphs.
+Shown above is the adjacency matrix that's the result of the parameter
+estimation.  It's pretty bad for a few reasons.  First, the way that I organized
+the RDP mixture model assigns a random vector to each vertex.  However, when we
+block nodes, even if the blocks have their own $\alpha$ parameter, the dot
+product between nodes in different blocks will probably be non-zero, and will
+generate an edge with a somewhat higher than non-zero probability.
+
+
+
 \paragraph{Future Work}
-Moving forward, it we will evaluate whether or not specific atlas region labels matter when performing comparing graphs, or rather the scale/number of regions. Randomly permuted atlases could be generated over a large range of scales and a peak operating point determined. This information can aide in building better, more interpretable classifiers for inference and diagnosis.
+It would be cool to implement the same Random Dot Product Model with blocks that
+have orthogonal or near-orthogonal vectors.  This would enable there to be fewer
+edges between nodes in different blocks.  But this would require the ability to
+generate orthogonal random vectors, or random near-orthogonal vectors with a
+bounded probability by another parameter.
+
+I also wrote code to do spectral embedding but did not get to play around with
+that for clustering purposes.  It would be interesting to see how to do spectral
+embedding for the different blocks in this model.
 
 \newpage
 
-\bibliography{statconn.bib}
+\bibliography{main.bib}
 \bibliographystyle{plain}
 
 
 \end{document}  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
