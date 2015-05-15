@@ -1,0 +1,28 @@
+\begin{thebibliography}{1}
+
+\bibitem{seeded}
+Carey E.~Priebe Donniell E.~Fishkind, Sancar~Adali.
+\newblock Seeded graph matching.
+\newblock {\em ArXiv}, 2012.
+
+\bibitem{matrix-cookbook}
+Michael Syskind~Pedersen Kaare Brandt~Petersen.
+\newblock {\em The Matrix Cookbook}.
+\newblock Technical University of Denmark, 2012.
+
+\bibitem{seeded-code}
+C.E. Priebe.
+\newblock Seeded graph matching.
+
+\bibitem{faq}
+Joshua Vogelstein John Conroy Vince Lyzinski Louis Podrazik Steven Kratzer Eric
+  Harley Donniell Fishkind Jacob Vogelstein~Carey Priebe.
+\newblock Fast approximate quadratic programming for large (brain) graph
+  matching.
+\newblock {\em ArXiv}, 2014.
+
+\bibitem{faq-code}
+Joshua Vogelstein.
+\newblock Fastapproximateqap.
+
+\end{thebibliography}
