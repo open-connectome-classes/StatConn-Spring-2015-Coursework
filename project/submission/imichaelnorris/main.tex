@@ -77,9 +77,11 @@ We applied parameter estimation to the alpha parameters for each block, using a
 conjugate gradient method to attempt to converge to a solution.
 
 The graph metric that we are using in optimization is the clustering 
-coefficient, which is defined \cite{pavlovic} as the amount of triplets of nodesthat are all connected to each other, divided by the nodes with degree of more 
-than 2.  We are trying to minimize the absolute difference between the estimated
-graph's clustering coefficient and the true graph's clustering coefficient.
+coefficient, which is defined \cite{pavlovic} as the amount of triplets of nodes
+that are all connected to each other, divided by the amount of nodes with degree
+of more  than 2.  We are trying to minimize the absolute difference between the 
+estimated graph's clustering coefficient and the true graph's clustering 
+coefficient.
 
 In an attempt to push the algorithm to converge faster, we also added a loss
 function.  If the mean degree of nodes in a block is outside of one standard
@@ -95,7 +97,7 @@ deviation of the mean degree of nodes in blocks from the true graph.
 
 \paragraph{Resolution}
 Shown above is the adjacency matrix that's the result of the parameter
-estimation.  It's pretty bad for a few reasons.  First, the way that I organized
+estimation.  It's suboptimal for a few reasons.  First, the way that I organized
 the RDP mixture model assigns a random vector to each vertex.  However, when we
 block nodes, even if the blocks have their own $\alpha$ parameter, the dot
 product between nodes in different blocks will probably be non-zero, and will
