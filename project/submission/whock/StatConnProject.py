@@ -1,3 +1,5 @@
+import sys
+sys.ps1 = 'SOMETHING'
 from matplotlib import pyplot as plt
 import numpy as np
 import random
@@ -6,8 +8,7 @@ from collections import Counter
 import copy
 from matplotlib import interactive
 
-interactive(True)
-
+# Please run %matplotlib qt before %run StatConnProject.py
 
 class CA3_Model():
     '''EN.580.694 Statistical Connectomics 
@@ -237,14 +238,14 @@ class CA3_Model():
         zones = ['Zone {}'.format(i+1) for i in range(9)]
         fig.add_subplot(1,2,1)
         plt.spy(np.asarray(cue_mat).T)
-        plt.title('Distribution of Axon Guidance Cues in Hippocampal CA3',fontsize=16,y=1.2)
-        plt.xticks(range(len(cues)),cues,size='small',rotation='vertical')
-        plt.yticks(range(len(zones)),zones,size='small')
+        plt.title('Distribution of Axon Guidance Cues in Hippocampal CA3',fontsize=26,y=1.4)
+        plt.xticks(range(len(cues)),cues,size='large',rotation='vertical')
+        plt.yticks(range(len(zones)),zones,size='large')
         fig.add_subplot(1,2,2)
         plt.spy(np.asarray(rec_mat).T)
-        plt.title('Distribution of Axon Guidance Cue Receptors in Hippocampal CA3',fontsize=16,y=1.2)
-        plt.xticks(range(len(receptors)),receptors,size='small',rotation='vertical')
-        plt.yticks(range(len(zones)),zones,size='small')
+        plt.title('Distribution of Axon Guidance Cue Receptors in Hippocampal CA3',fontsize=26,y=1.4)
+        plt.xticks(range(len(receptors)),receptors,size='large',rotation='vertical')
+        plt.yticks(range(len(zones)),zones,size='large')
         plt.show()
         
     def hub_analysis(self,numiters=100):
@@ -295,7 +296,8 @@ class CA3_Model():
 
         
         
-        
+# Please run %matplotlib qt before %run StatConnProject.py
+  
 
         
 def routine(model,baseps,maxmod,shuff_counts,mean_exp):
@@ -306,8 +308,8 @@ def routine(model,baseps,maxmod,shuff_counts,mean_exp):
 	fig1 = plt.figure()
 	fig1.add_subplot(2,2,1)
 	plt.spy(model.obsv_ca3[0][4])
-	plt.ylabel('To Vertex...',fontsize=18)
-	plt.xlabel('From Vertex...',fontsize=18)
+	plt.ylabel('To Vertex...',fontsize=20)
+	plt.xlabel('From Vertex...',fontsize=20)
 	plt.title('Control CA3 Adjacency Matrix',fontsize=24)
 	fig1.add_subplot(2,2,2)
 	plt.spy(model.obsv_ca3[1][4])
@@ -317,11 +319,11 @@ def routine(model,baseps,maxmod,shuff_counts,mean_exp):
 	fig1.add_subplot(2,2,3)
 	plt.pcolor(model.obsv_ca3[0][3])
 	plt.colorbar()
-	plt.title('Control Graph Beta Matrix',fontsize=16)
+	plt.title('Control Graph Beta Matrix',fontsize=24)
 	fig1.add_subplot(2,2,4)
 	plt.pcolor(np.asarray(model.obsv_ca3[1][3]))
 	plt.colorbar()
-	plt.title('Experimental Graph Beta Matrix',fontsize=16)
+	plt.title('Experimental Graph Beta Matrix',fontsize=24)
 	
 	fig2 = plt.figure()
 	model.plot_gene_info(fig2)
@@ -329,9 +331,9 @@ def routine(model,baseps,maxmod,shuff_counts,mean_exp):
 	fig3 = plt.figure()
 	plt.hist(shuff_counts)
 	plt.vlines(mean_exp,0,80)
-	plt.title('Observed Hubs vs. Hubs from 500 Shuffled Graphs',fontsize=24)
-	plt.xlabel('Number of Hubs',fontsize=16)
-	plt.ylabel('Frequency of Occurance',fontsize=16)
+	plt.title('Observed Hubs vs. Hubs from 500 Shuffled Graphs',fontsize=26)
+	plt.xlabel('Number of Hubs',fontsize=20)
+	plt.ylabel('Frequency of Occurance',fontsize=20)
 	plt.show()
 	
 shuff_counts = [61, 68, 59, 69, 62, 67, 60, 60, 62, 69, 66, 77, 61, 71, 69, 64, 72, 64, 63, 70, 76, 71, 62, 75, 68, 63, 77, 75, 80, 71, 77, 60, 74, 64, 77, 70, 66, 71, 60, 87, 73, 70, 69, 66, 64, 76, 67, 78, 75, 66, 79, 72, 
@@ -346,7 +348,9 @@ shuff_counts = [61, 68, 59, 69, 62, 67, 60, 60, 62, 69, 66, 77, 61, 71, 69, 64, 
 
 mean_exp = 6
 
+# Please run %matplotlib qt before %run StatConnProject.py
+
 ca3 = CA3_Model(1008)
-routine(ca3,[0.75,0.25],0.7,shuff_counts,mean_exp)
+routine(ca3,[0.75,0.25],0.7,shuff_counts,6)
 	
         

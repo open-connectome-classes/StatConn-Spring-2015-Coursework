@@ -1,5 +1,3 @@
-
-
 # Final Project
 # Statistical Connectomics
 # Alan Juliano
@@ -7,266 +5,169 @@
 
 install.packages('e1071',dependencies=TRUE) 
 install.packages("MASS")
+install.packages("brainwaver")
 library(e1071)
 library(MASS)
 install.packages("class")
 install.packages("DAAG")
 library(class)
-librar("DAAG")
-data<-read.csv("~/statconnfinal.csv")
-attach(data)
-names(data)
+library("DAAG")
+library("brainwaver")
+data(brain)
+data<-as.matrix(brain)
 
-#Using gender as a factor
-data$gender<-factor(data$gender)
-
-# ADHD and Depression Regions of Brain 
-# Biologically, research has indicated that ADHD is a deficiency within the premotor cortex along with
-# the superior prefrontal cortex. Depression is displayed through defficiencies in the frontal cortex, 
-# hippocampus, amygdala, striatum and thalamus regions of the brain. 
 
 # In our data, V8-V15 and V22-30 are the regions of interest when examining ADHD
-# Depression effects activity in the V56-V60 (Hippocampus), V63-65(Amygdala), V32-35(Striatum), V78-82 (Thalamus)  
+superiorpc<-data[,8:15]
+premotor<-data[,22:30]
 
-#ADHD Region of the Brain
+#Depression effects activity in the V56-V60 (Hippocampus), V63-65(Amygdala), V32-35(Striatum), V78-82 #(Thalamus)  
 
-# From here we are able to run logistic regression 
+hippo<-data[,56:60]
+amyg<-data[,63:65]
+striatum<-data[,32:35]
+thalamus<-data[,78:82]
 
- mylogit<-glm(adhd~V8+V9+V10+V11+V12+V13+V14+V15+V22+V23+V24+V25+V26+V27+V28+V29+V30+gender,data=data,family="binomial")
- summary(mylogit)
+# Correlation Matrices for each level of wavelet decomposition
+#ADHD Regions
 
-#Call:
-#glm(formula = adhd ~ V8 + V9 + V10 + V11 + V12 + V13 + V14 + 
-#    V15 + V22 + V23 + V24 + V25 + V26 + V27 + V28 + V29 + V30 + 
-#    gender, family = "binomial", data = data)
+wave.cor.list1<-const.cor.list(superiorpc, method = "modwt" ,wf = "la8", n.levels = 6,
+boundary = "periodic", p.corr = 0.975)
 
-#Deviance Residuals: 
-#    Min       1Q   Median       3Q      Max  
-#-0.8080  -0.5263  -0.4744  -0.4216   2.4223  
+wave.cor.list2<-const.cor.list(premotor, method = "modwt" ,wf = "la8", n.levels = 6,
+ boundary = "periodic", p.corr = 0.975)
+  
+#Depression Regions
 
-#Coefficients:
-#              Estimate Std. Error z value Pr(>|z|)    
-#(Intercept) -2.1026690  0.0999466 -21.038   <2e-16 ***
-#V8          -0.0115285  0.0103788  -1.111   0.2667    
-#V9          -0.0079060  0.0059359  -1.332   0.1829    
-#V10         -0.0042993  0.0060658  -0.709   0.4785    
-#V11         -0.0054432  0.0071121  -0.765   0.4441    
-#V12          0.0016451  0.0076320   0.216   0.8293    
-#V13         -0.0065502  0.0084538  -0.775   0.4384    
-#V14         -0.0059843  0.0086006  -0.696   0.4865    
-#V15          0.0169776  0.0080167   2.118   0.0342 *  
-#V22          0.0041620  0.0051870   0.802   0.4223    
-#V23          0.0033985  0.0066132   0.514   0.6073    
-#V24         -0.0015768  0.0079091  -0.199   0.8420    
-#V25          0.0046741  0.0041884   1.116   0.2644    
-#V26         -0.0003988  0.0031019  -0.129   0.8977    
-#V27          0.0057526  0.0057730   0.996   0.3190    
-#V28         -0.0046816  0.0050992  -0.918   0.3586    
-#V29          0.0035973  0.0074636   0.482   0.6298    
-#V30         -0.0055721  0.0074746  -0.745   0.4560    
-#gender1      0.0635755  0.1394597   0.456   0.6485    
-#---
-#Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+wave.cor.list3<-const.cor.list(hippo, method = "modwt" ,wf = "la8", n.levels = 6,
+boundary = "periodic", p.corr = 0.975)
 
-#(Dispersion parameter for binomial family taken to be 1)
+wave.cor.list4<-const.cor.list(amyg, method = "modwt" ,wf = "la8", n.levels = 6,
+boundary = "periodic", p.corr = 0.975)
 
-#    Null deviance: 1463.6  on 2047  degrees of freedom
-#Residual deviance: 1445.7  on 2029  degrees of freedom
-#AIC: 1483.7
+wave.cor.list5<-const.cor.list(striatum, method = "modwt" ,wf = "la8", n.levels = 6,
+boundary = "periodic", p.corr = 0.975)
 
-#Number of Fisher Scoring iterations: 5
+wave.cor.list6<-const.cor.list(thalamus, method = "modwt" ,wf = "la8", n.levels = 6,
+boundary = "periodic", p.corr = 0.975)
+
+# Adjacency Matrix within each of our partitioned regions along with required edges for a graph to be generated
+#nbedges=how many edges are required for a graph to be generated
+#sup.thresh= threshold for each correlation matrix to generate an adgacency matrix with correctly defined edges
+
+# ADHD Region of Brain
+#Region 1
+adj.mat.list1<-const.adj.mat(wave.cor.list1[[4]], sup = 0.44,proc.length=dim(data)[1],
+num.levels=6)
+nb.edges1<-sum(adj.mat.list1)/2
+sup.thresh1<-choose.thresh.nbedges(wave.cor.list1[[4]],nb.edges=nb.edges1, proc.length=dim(data)[1],num.levels=6)
+pvalue.cor1<-p.value.compute(wave.cor.list1[[4]],proc.length=dim(data)[1], sup=0.44, num.levels=6)
+pvalue.thresh1<-compute.FDR(pvalue.cor1,.05)
 
 
+#Region 2
+adj.mat.list2<-const.adj.mat(wave.cor.list2[[4]], sup = 0.44,proc.length=dim(data)[1],
+num.levels=6)
+nb.edges2<-sum(adj.mat.list2)/2
+sup.thresh2<-choose.thresh.nbedges(wave.cor.list2[[4]],nb.edges=nb.edges2, proc.length=dim(data)[1],num.levels=6)
+pvalue.cor2<-p.value.compute(wave.cor.list2[[4]],proc.length=dim(data)[1], sup=0.44, num.levels=6)
+pvalue.thresh2<-compute.FDR(pvalue.cor2,.05)
 
-#V15 is the most statistically significant region when identifying ADHD patients. 
+#Depression Region of Brain
+#Region 3
+adj.mat.list3<-const.adj.mat(wave.cor.list3[[4]], sup = 0.44,proc.length=dim(data)[1],
+num.levels=6)
+nb.edges3<-sum(adj.mat.list3)/2
+sup.thresh3<-choose.thresh.nbedges(wave.cor.list3[[4]],nb.edges=nb.edges3, proc.length=dim(data)[1],num.levels=6)
+pvalue.cor3<-p.value.compute(wave.cor.list3[[4]],proc.length=dim(data)[1], sup=0.44, num.levels=6)
+pvalue.thresh3<-compute.FDR(pvalue.cor3,.05)
+#Region 4
+adj.mat.list4<-const.adj.mat(wave.cor.list4[[4]], sup = 0.44,proc.length=dim(data)[1],
+num.levels=6)
+nb.edges4<-sum(adj.mat.list4)/2
+sup.thresh4<-choose.thresh.nbedges(wave.cor.list4[[4]],nb.edges=nb.edges4, proc.length=dim(data)[1],num.levels=6)
+pvalue.cor4<-p.value.compute(wave.cor.list4[[4]],proc.length=dim(data)[1], sup=0.44, num.levels=6)
+pvalue.thresh4<-compute.FDR(pvalue.cor4,.05)
+#Region5
+adj.mat.list5<-const.adj.mat(wave.cor.list5[[4]], sup = 0.44,proc.length=dim(data)[1],
+num.levels=6)
+nb.edges5<-sum(adj.mat.list5)/2
+sup.thresh5<-choose.thresh.nbedges(wave.cor.list5[[4]],nb.edges=nb.edges5, proc.length=dim(data)[1],num.levels=6)
+pvalue.cor5<-p.value.compute(wave.cor.list5[[4]],proc.length=dim(data)[1], sup=0.44, num.levels=6)
+pvalue.thresh5<-compute.FDR(pvalue.cor5,.05)
+#Region 6
+adj.mat.list6<-const.adj.mat(wave.cor.list6[[4]], sup = 0.44,proc.length=dim(data)[1],
+num.levels=6)
+nb.edges6<-sum(adj.mat.list6)/2
+sup.thresh6<-choose.thresh.nbedges(wave.cor.list6[[4]],nb.edges=nb.edges6, proc.length=dim(data)[1],num.levels=6)
 
-#Depression Region
- mylogit2<-glm(depression~V56+V57+V58+V59+V60+V63+V64+V65+V32+V33+V34+V35+V26+V78+V79+V80+V81+V82+gender,data=data,family="binomial")
-summary(mylogit2)
-#Call:
-#glm(formula = depression ~ V56 + V57 + V58 + V59 + V60 + V63 + 
-#    V64 + V65 + V32 + V33 + V34 + V35 + V26 + V78 + V79 + V80 + 
-#    V81 + V82 + gender, family = "binomial", data = data)
-#
-#Deviance Residuals: 
-#    Min       1Q   Median       3Q      Max  
-#-1.0015  -0.6490  -0.5912  -0.5190   2.1303  
+# False Discovery Rate
+# designed to control the expected proportion of incorrectly rejected null hypotheses (or else large type 1 errors)
+pvalue.thresh1<-compute.FDR(pvalue.cor1,.05)
+pvalue.thresh2<-compute.FDR(pvalue.cor2,.05)
+pvalue.thresh3<-compute.FDR(pvalue.cor3,.05)
+pvalue.thresh4<-compute.FDR(pvalue.cor4,.05)
+pvalue.thresh5<-compute.FDR(pvalue.cor5,.05)
+pvalue.thresh6<-compute.FDR(pvalue.cor6,.05)
+# pvalue.thresh1 and pvalue.thresh3 have the highest p values for FDR 
 
-#Coefficients:
-#              Estimate Std. Error z value Pr(>|z|)    
-#(Intercept) -1.637e+00  8.435e-02 -19.402   <2e-16 ***
-#V56         -1.023e-02  7.642e-03  -1.338   0.1809    
-#V57         -9.181e-03  9.203e-03  -0.998   0.3185    
-#V58         -1.532e-03  1.040e-02  -0.147   0.8829    
-#V59         -5.884e-03  7.474e-03  -0.787   0.4311    
-#V60         -7.605e-03  7.093e-03  -1.072   0.2836    
-#V63         -1.908e-04  6.096e-03  -0.031   0.9750    
-#V64          1.885e-02  7.762e-03   2.428   0.0152 *  
-#V65          7.952e-04  3.988e-03   0.199   0.8420    
-#V32         -2.652e-05  5.039e-03  -0.005   0.9958    
-#V33         -3.578e-03  7.563e-03  -0.473   0.6362    
-#V34         -7.759e-03  7.998e-03  -0.970   0.3320    
-#V35          2.687e-03  3.318e-03   0.810   0.4180    
-#V26          6.395e-04  2.421e-03   0.264   0.7917    
-#V78          1.008e-02  4.643e-03   2.172   0.0299 *  
-#V79          5.251e-03  3.107e-03   1.690   0.0911 .  
-#V80         -2.231e-03  3.635e-03  -0.614   0.5393    
-#V81          1.826e-03  6.045e-03   0.302   0.7627    
-#V82         -3.966e-03  8.093e-03  -0.490   0.6241    
-#gender1      1.169e-01  1.177e-01   0.993   0.3207    
-#---
-#Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#Correlations Between Adjacency Matrix and Correlations
+adj.mat1<-correlations.to.adjacencies(wave.cor.list1,edge.func=(function(x){x*log(x)}))
+adj.mat2<-correlations.to.adjacencies(wave.cor.list2,edge.func=(function(x){x*log(x)}))
+adj.mat3<-correlations.to.adjacencies(wave.cor.list3,edge.func=(function(x){x*log(x)}))
+adj.mat4<-correlations.to.adjacencies(wave.cor.list4,edge.func=(function(x){x*log(x)}))
+adj.mat5<-correlations.to.adjacencies(wave.cor.list5,edge.func=(function(x){x*log(x)}))
+adj.mat6<-correlations.to.adjacencies(wave.cor.list6,edge.func=(function(x){x*log(x)}))
 
-#(Dispersion parameter for binomial family taken to be 1)
-
-#    Null deviance: 1895.1  on 2047  degrees of freedom
-#Residual deviance: 1873.4  on 2028  degrees of freedom
-#AIC: 1913.4
-
-#Number of Fisher Scoring iterations: 4
-
-
-# In our logistic model, we see that V59 is the most statistically significant when identifying depression. 
-
-#Removing gender variable from Depression
-> mylogit3<-glm(depression~V56+V57+V58+V59+V60+V63+V64+V65+V32+V33+V34+V35+V26+V78+V79+V80+V81+V82,data=data,family="binomial")
-> summary(mylogit3)
-
-#Call:
-#glm(formula = depression ~ V56 + V57 + V58 + V59 + V60 + V63 + 
-#    V64 + V65 + V32 + V33 + V34 + V35 + V26 + V78 + V79 + V80 + 
-#    V81 + V82, family = "binomial", data = data)
-
-#Deviance Residuals: 
- #   Min       1Q   Median       3Q      Max  
-#-1.0211  -0.6467  -0.5910  -0.5211   2.1516  
-
-#Coefficients:
-#              Estimate Std. Error z value Pr(>|z|)    
-#(Intercept) -1.578e+00  5.939e-02 -26.573   <2e-16 ***
-#V56         -1.030e-02  7.636e-03  -1.348   0.1776    
-#V57         -9.501e-03  9.196e-03  -1.033   0.3015    
-#V58         -1.370e-03  1.040e-02  -0.132   0.8952    
-#V59         -5.673e-03  7.469e-03  -0.760   0.4475    
-#V60         -7.679e-03  7.091e-03  -1.083   0.2788    
-#V63         -6.515e-07  6.088e-03   0.000   0.9999    
-#V64          1.870e-02  7.757e-03   2.411   0.0159 *  
-#V65          7.183e-04  3.980e-03   0.180   0.8568    
-#V32          2.240e-04  5.026e-03   0.045   0.9645    
-#V33         -3.576e-03  7.567e-03  -0.473   0.6365    
-#V34         -7.908e-03  8.001e-03  -0.988   0.3229    
-#V35          2.721e-03  3.311e-03   0.822   0.4113    
-#V26          6.096e-04  2.420e-03   0.252   0.8011    
-#V78          9.921e-03  4.638e-03   2.139   0.0324 *  
-#V79          5.223e-03  3.109e-03   1.680   0.0930 .  
-#V80         -2.155e-03  3.634e-03  -0.593   0.5531    
-#V81          1.697e-03  6.039e-03   0.281   0.7787    
-#V82         -3.988e-03  8.089e-03  -0.493   0.6220    
----
-#Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-#(Dispersion parameter for binomial family taken to be 1)
-
- #   Null deviance: 1895.1  on 2047  degrees of freedom
-#Residual deviance: 1874.4  on 2029  degrees of freedom
-#AIC: 1912.4
-
-Number of Fisher Scoring iterations: 4
-# V64 and V68 are again the most statistically significant
-
-#Removing gender variable from ADHD
-> mylogit4<-glm(formula = adhd ~ V8 + V9 + V10 + V11 + V12 + V13 + V14 + 
-+     V15 + V22 + V23 + V24 + V25 + V26 + V27 + V28 + V29 + V30, family = "binomial", data = data)
-> summary(mylogit4)
-#
-#Call:
-#glm(formula = adhd ~ V8 + V9 + V10 + V11 + V12 + V13 + V14 + 
-#    V15 + V22 + V23 + V24 + V25 + V26 + V27 + V28 + V29 + V30, 
-#    family = "binomial", data = data)
-
-#Deviance Residuals: 
-#    Min       1Q   Median       3Q      Max  
-#-0.7989  -0.5260  -0.4739  -0.4217   2.4143  
-
-#Coefficients:
- #            Estimate Std. Error z value Pr(>|z|)    
-#(Intercept) -2.071095   0.071230 -29.076   <2e-16 ***
-#V8          -0.011611   0.010371  -1.120    0.263    
-#V9          -0.007883   0.005932  -1.329    0.184    
-#V10         -0.004260   0.006065  -0.702    0.482    
-#V11         -0.005543   0.007104  -0.780    0.435    
-#V12          0.001734   0.007630   0.227    0.820    
-#V13         -0.006515   0.008448  -0.771    0.441    
-#V14         -0.006065   0.008599  -0.705    0.481    
-#V15          0.016985   0.008013   2.120    0.034 *  
-#V22          0.004175   0.005183   0.806    0.421    
-#V23          0.003457   0.006606   0.523    0.601    
-#V24         -0.001678   0.007906  -0.212    0.832    
-#V25          0.004711   0.004189   1.125    0.261    
-#V26         -0.000399   0.003100  -0.129    0.898    
-#V27          0.005730   0.005772   0.993    0.321    
-#V28         -0.004730   0.005098  -0.928    0.354    
-#V29          0.003619   0.007465   0.485    0.628    
-#V30         -0.005663   0.007471  -0.758    0.448    
-#---
-#Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-#(Dispersion parameter for binomial family taken to be 1)
-
- #   Null deviance: 1463.6  on 2047  degrees of freedom
-#Residual deviance: 1445.9  on 2030  degrees of freedom
-#AIC: 1481.9
-
-#Number of Fisher Scoring iterations: 5
+#Determining Graph Efficiency and Compare between ADHD and Depression Regions
 
 
 
+n.regions<-dim(brain)[2]
 
-################
+#Construction of the correlation matrices for each level of the wavelet decomposition
+wave.cor.list<-const.cor.list(brain, method = "modwt" ,wf = "la8", n.levels = 6, 
+                               boundary = "periodic", p.corr = 0.975)
+# First we must implement a threshold on correlation
+supseq1<-((1:10)/10) #sequence of the correlation threshold 
+gmax<-length(supseq1)
+Eglob<-matrix(0,6,gmax)
+Eloc<-matrix(0,6,gmax)
+Cost<-matrix(0,6,gmax)
 
-#Depression 
+n.levels<-6
 
-mylogit2<-glm(depression~V56+V57+V58+V59+V60+V63+V64+V65+V32+V33+V34+V35+V26+V78+V79+V80+V81+V82+gender,data=data,family="binomial")
-summary(mylogit2)
+# A for loop was then generated 
 
-### Removing gender from the data
-mylogit3<-glm(depression~V56+V57+V58+V59+V60+V63+V64+V65+V32+V33+V34+V35+V26+V78+V79+V80+V81+V82,data=data,family="binomial")
-summary(mylogit3)
-# Comparing the two models (with and without gender)
-anova(mylogit3,mylogit2,test="Chisq")
+for(i in 1:gmax){
+n.sup<-supseq1[i]
 
-# ADHD
-mylogit<-glm(adhd~V8+V9+V10+V11+V12+V13+V14+V15+V22+V23+V24+V25+V26+V27+V28+V29+V30+gender,data=data,family="binomial")
- summary(mylogit)
- #removing gender
-mylogit4<-glm(formula = adhd ~ V8 + V9 + V10 + V11 + V12 + V13 + V14 + 
-V15 + V22 + V23 + V24 + V25 + V26 + V27 + V28 + V29 + V30, family = "binomial", data = data)
-summary(mylogit4)
-anova(mylogit4,mylogit,test="Chisq")
+#Construction of the adjacency matrices associated to each level of the wavelet decomposition
+wave.adj.list<-const.adj.list(wave.cor.list, sup = n.sup)
 
-# Refining Depression Interpretation
- mylogit5<-glm(depression~V56+V57+V59+V60+V64+V33+V34+V35+V78+V79+V80+V82,data=data,family="binomial")
-summary(mylogit5)
-# Displays further connectivity
-mylogit6<-glm(depression~V56+V57+V59+V60+V64+V34+V35+V78+V79,data=data,family="binomial")
-summary(mylogit6)
-# Further exemplifies that the Thalamas plays an integral role in depression
-anova(mylogit6,mylogit5,test="Chisq")
+#For each level of the wavelet decomposition
+for(j in 1:n.levels){
 
-#Refining ADHD
-mylogit7<-glm(formula = adhd ~ V8 + V9 + V10 + V11 + V13 + V14 + 
-V15 + V22 + V27 + V28 + V30, family = "binomial", data = data)
-summary(mylogit7)
+Eglob.brain<-global.efficiency(wave.adj.list[[j]],
+                        weight.mat=matrix(1,n.regions,n.regions))
+Eglob[j,i]<-Eglob.brain$eff
 
-# Comparison Between Statistically Significant Regions
-adhdfinal<-data[,c("V8","V9","V10","V11","V13","V14","V15","V22","V27","V28","V30")]
-depressionfinal<-data[,c("V56","V57","V59","V60","V64","V34","V35","V78","V79")]
-correlation<-cor(adhdfinal,depressionfinal)
-write.table(correlation)
- 
-# Plotting Statistically Significant Regions vs. Disease Presence
-par(mfrow=c(1,3))
-plot(depression,V64,xlab="Depression (1=Yes 0=No)",ylab="fMRI of V64") 
-plot(depression,V78,xlab="Depression (1=Yes 0=No)",ylab="fMRI of V78") 
-plot(adhd,V15,xlab="ADHD (1=Yes 0=No)",ylab="fMRI of V15") 
-mtext("ADHD & Depression vs. Statistically Significant Regions of the Brain", side=3, outer=TRUE, line=-3)
+Eloc.brain<-local.efficiency(wave.adj.list[[j]],
+                                weight.mat=matrix(1,n.regions,n.regions))
+Eloc[j,i]<-Eloc.brain$eff
+
+Cost.brain<-global.cost(wave.adj.list[[j]],
+                                weight.mat=matrix(1,n.regions,n.regions))
+Cost[j,i]<-Cost.brain
+
+}}
+
+plot(sup.seq,(1:gmax)/2,type='n',xlab='R: Correlation Threshold',ylab='Global Efficiency (Graph)',
+     cex.axis=2,cex.lab=2,xlim=c(0,1),ylim=c(0,1))
+
+for(i in 1:n.levels){
+lines(sup.seq,Eglob[i,],type='l',col=i,lwd=2)
+}
+legend(x="topright",legend=c("Level 1","Level 2","Level 3","Level 4",
+                                "Level 5","Level 6"),fill=TRUE,col=(1:n.levels),lwd=2)
+

@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+
+\begin{document}
+
+
+\title{Statistical and Connectomic Association of Depression and ADHD}
+\date{2015-05-14}
+\author{Alan Juliano}
+
+\maketitle
+
+\section{Opportunity}
+
+The presence of psychiatric disorders is increasing according to recent population studies. Specifically, depression is present in 18% of the population while attention deficit hyperactivity disorder (ADHD) is present in 11% of the population (1). In previous research, the two disorders were said to be unrelated. However, it has recently been discovered that the two disorders often overlap in diagnosis from a behavioral aspect (1). 
+However, a new spotlight has been focused on structural connectivity between the two disorders.
+Depression hinders blood flow and seratonin to the hippocampus, amygdala, striatum, and thalamus regions within the brain (2). ADHD, interestingly, is displayed through blood flow deficiencies to the hippocampus, amygdala, striatum and thalamus regions (3). This data has been quantified in a spatial manner through the development of fMRI data. Having previously performed quantitative research in neuropsychiatry, I saw an opportunity to combine information regarding the brain’s connectivity and examine it in comparison to the brain regions.
+
+
+\section{Challenge}
+
+The goal was to combine neurological structure and blood flow information to gain statistical inference. Although previous research has indicated a possible relationship between the two disorders, there is an absence of quantitative research regarding the statistical relationship between the hindered brain regions. 
+
+\section{Action}
+
+The first step towards determining the relationship between ADHD and depression was done by utilizing the "Brainwaver" package in R. This data is preprocessed and allows for a variety of statistical and graphical techniques to be implemented with the data. Firstly, I developed correlation matrices within the designated regions. From that point, the data was able to be spatially quantified. Then, quantities were calculated in terms of how many edges were needed in these regions for a graph to be determined. From there, I utilized an algorithm that correlates adjacency matrices and their respective correlations in order to gain further statistical inference. Then, I graphically dsitributed the results using graph efficiency. Statistical significance was gained in regards which nodes were pertinent in the relationships amongst the separated brain regions. 
+
+
+\section{Resolution}
+
+Results of the algorithms indicated that the amygdala and the thalamus regions were important in depression identification. Although previous research indicates that the hippocampus and striatum effect depression more (2), the models within our data failed to find this. The best correlation between adjacency matrices and edges was displayed in the superior prefrontal cortex region. Again, the limited data size and information available for research leads to the need for more. 
+
+\section{Future Work}
+
+Using a variety of data mining tools and techniques, the relationships between ADHD hindered regions and depression hindered regions in terms of brain localization and connectivity could be further quantified. This project could be further investigated by implementing more research in regards to the structure of the thalamus and drug delivery therapies for depression. The results suggest more research regarding the interactions of the thalamus and the superior prefrontal cortex when diagnosing depression and ADHD. 
+
+
+\includegraphics[scale=0.5]{Final.png}
+
+
+\section{Works Cited}
+Antshel, Kevin M., et al. "Advances in understanding and treating ADHD." BMC medicine 9.1 (2011): 72.
+
+Griffa, Alessandra, et al. "Structural connectomics in brain diseases."Neuroimage 80 (2013): 515-526.
+
+Hong, Soon-Beom, et al. "Connectomic disturbances in attention-deficit/hyperactivity disorder: A whole-brain tractography analysis." Biological psychiatry 76.8 (2014): 656-663.
+
+
+\end{document}
