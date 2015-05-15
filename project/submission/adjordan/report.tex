@@ -1,0 +1,62 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\geometry{letterpaper}                  
+\usepackage{graphicx}
+\usepackage[hyphens]{url}
+\usepackage{fancyhdr}
+%\pagestyle{fancy}
+\usepackage{fixltx2e}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{url}
+\usepackage[normalem]{ulem}
+\usepackage[pdftex]{color}
+\usepackage{varioref}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\labelformat{equation}{\textup{(#1)}}
+\usepackage[sort&compress,colon,square,numbers]{natbib}
+%\usepackage{cite}
+
+
+\usepackage{color}
+\newcommand{\todo}[1]{{\color{red}{\it TODO: #1}}}
+\newcommand{\jovo}[1]{{\color{green}{\it jovo: #1}}}
+\newcommand{\will}[1]{{\color{blue}{\it will: #1}}}
+\newcommand{\greg}[1]{{\color{cyan}{\it greg: #1}}}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+
+\begin{document}
+
+\begin{center}\Large \bf EN.580.694: Statistical Connectomics \\ Final Project Report \end{center}
+\begin{center} Austin Jordan $\cdot$  May 14, 2015 \end{center}
+
+\subsection*{Identifying changes in electrode communities during seizure in medically refractory epilepsy patients using pre-seizure and seizure sEEG recordings}
+
+\paragraph{Opportunity}
+For medically refractory epilepsy patients, the only way to control their seizures is to remove the part of the brain that is generating the seizures, the epileptogenic zone (EZ). This task is often difficult and is currently done by eye. It has been previously demonstrated that clustering electrodes into groups shows that electrodes in the EZ mostly cluster together during seizure events [1].
+\paragraph{Challenge}
+Clustering techniques are only effective in finding EZ communities when using data from a seizure event. It would be beneficial to identify the EZ based on interictal data. This would reduce the amount of time spent in the hospital and thus the cost associated with sEEG recording. Modularity optimization can be used to determine the relative strength of clustering between ictal and preictal data.
+\paragraph{Action}
+Data was obtained from the Cleveland Clinic Epilepsy Ward. Electrodes from the same patient were clustered two times per seizure, once with preictal data and once with ictal data. Clustering was performed using a modularity optimization technique as described by Blondel et. al. [2]. In order to identify changes in clustering as a seizure starts, the modularity values, which describe the effectiveness of the algorithm in generating clusters, and the structure of the communities formed.
+\paragraph{Resolution}
+Shown in the attached figure is the result of modularity optimization clustering for one seizure of one patient. The graph above demonstrates communities formed from preictal data and the graph below demonstrates communities formed from ictal data. Modularity values had negligible differences, imply that both networks were similar in strength and legitimacy but there are structural changes in the communities, both in linked electrodes as well as the number of communities formed. Strength of connections between electrodes seems to be more pronounced in ictal data. This was seen across almost every patient.
+\paragraph{Future Work}
+Moving forward, it would be beneficial to identify trends in community shifts from preictal to ictal periods. Specifically, electrodes should be examined individually to see if there is a specific trend or pattern in preictal time that indicates that an electrode will move into the ictal cluster. Furthermore, it would be beneficial to identify if electrodes in similar positions across patients with similar afflictions are clustered similarly.
+
+\newpage
+\begin{thebibliography}{9}
+
+\bibitem{burns}
+Burns, Samuel P., et al. "Network dynamics of the brain and influence of the epileptic seizure onset zone." Proceedings of the National Academy of Sciences 111.49 (2014): E5321-E5330.
+  
+\bibitem{blondel}
+Blondel, Vincent D., et al. "Fast unfolding of communities in large networks." Journal of Statistical Mechanics: Theory and Experiment 2008.10 (2008): P10008.
+
+\end{thebibliography}
+
+\end{document}
